@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="allProgramFormContext" prefHeight="1000.0" prefWidth="1950.0" style="-fx-background-color: #ffb8b8;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.sipsewanainstitute.hibernate.controller.allProgramFormController">
+    <children>
+        <Text layoutX="179.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Training program Details Form">
+            <font>
+                <Font name="Rockwell" size="50.0" />
+            </font>
+        </Text>
+        <ImageView fitHeight="52.0" fitWidth="84.0" layoutX="86.0" layoutY="52.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../assets/img9.png" />
+            </image>
+        </ImageView>
+        <JFXButton layoutX="80.0" layoutY="52.0" onAction="#backToProgramaDetaisDashBoardOnAction" prefHeight="52.0" prefWidth="62.0" textFill="TRANSPARENT" />
+        <TableView fx:id="tblProgramDetails" layoutX="188.0" layoutY="279.0" prefHeight="513.0" prefWidth="1531.0" style="-fx-background-color: #f7f1e3; -fx-background-radius: 5;" AnchorPane.bottomAnchor="185.0" AnchorPane.leftAnchor="188.0" AnchorPane.rightAnchor="231.0" AnchorPane.topAnchor="279.0">
+            <columns>
+                <TableColumn fx:id="colProgramDetailID" prefWidth="212.0" text="Program ID" />
+                <TableColumn fx:id="colProgramDetailName" prefWidth="300.0" text="Program" />
+                <TableColumn fx:id="colProgramDetailDuration" prefWidth="268.0" text="Duration" />
+                <TableColumn fx:id="colProgramDetailFee" prefWidth="281.0" text="Fee(LKR)" />
+                <TableColumn fx:id="colProgramDetailDate" prefWidth="233.0" text="Date" />
+                <TableColumn fx:id="colProgramDetailTime" prefWidth="236.0" text="Time" />
+            </columns>
+        </TableView>
+      <Text layoutX="188.0" layoutY="247.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Program ID :">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Text>
+      <TextField fx:id="txtSearchProgram" layoutX="380.0" layoutY="222.0" prefHeight="39.0" prefWidth="309.0" promptText="Search Here" />
+    </children>
+</AnchorPane>

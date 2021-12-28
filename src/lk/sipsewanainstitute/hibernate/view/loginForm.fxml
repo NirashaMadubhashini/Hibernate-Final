@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="loginFormContext" prefHeight="1000.0" prefWidth="1950.0" style="-fx-background-color: #ccae62;"
+            xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="lk.sipsewanainstitute.hibernate.controller.loginFormController">
+    <children>
+        <Pane layoutX="1024.0" layoutY="134.0" opacity="0.64" prefHeight="626.0" prefWidth="549.0"
+              style="-fx-background-color: #f5f6fa; -fx-background-radius: 50;">
+            <effect>
+                <Blend/>
+            </effect>
+            <children>
+                <ImageView fitHeight="131.0" fitWidth="140.0" layoutX="209.0" layoutY="38.0" pickOnBounds="true"
+                           preserveRatio="true">
+                    <image>
+                        <Image url="@../assets/img2.png"/>
+                    </image>
+                </ImageView>
+                <JFXPasswordField fx:id="txtPassword" layoutX="150.0" layoutY="361.0" prefHeight="31.0"
+                                  prefWidth="288.0" promptText="Password">
+                    <font>
+                        <Font name="System Bold" size="20.0"/>
+                    </font>
+                </JFXPasswordField>
+                <JFXTextField fx:id="txtUserName" layoutX="150.0" layoutY="262.0" onAction="#moveToPassword"
+                              prefHeight="44.0" prefWidth="288.0" promptText="User Name">
+                    <font>
+                        <Font name="System Bold" size="20.0"/>
+                    </font>
+                </JFXTextField>
+                <ImageView fitHeight="27.0" fitWidth="35.0" layoutX="106.0" layoutY="370.0" pickOnBounds="true"
+                           preserveRatio="true">
+                    <image>
+                        <Image url="@../assets/img4.png"/>
+                    </image>
+                </ImageView>
+                <JFXButton layoutX="38.0" layoutY="481.0" onAction="#openDashBoardOnAction" opacity="0.78"
+                           prefHeight="52.0" prefWidth="473.0" ripplerFill="BLACK"
+                           style="-fx-background-color: #f5f6fa; -fx-background-radius: 15;" text="   LOGIN">
+                    <font>
+                        <Font name="System Bold" size="22.0"/>
+                    </font>
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                </JFXButton>
+                <ImageView fitHeight="35.0" fitWidth="40.0" layoutX="199.0" layoutY="490.0" pickOnBounds="true"
+                           preserveRatio="true">
+                    <image>
+                        <Image url="@../assets/img5.png"/>
+                    </image>
+                </ImageView>
+                <ImageView fitHeight="27.0" fitWidth="27.0" layoutX="106.0" layoutY="271.0" pickOnBounds="true"
+                           preserveRatio="true">
+                    <image>
+                        <Image url="@../assets/img3.png"/>
+                    </image>
+                </ImageView>
+                <Text layoutX="320.0" layoutY="430.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Forgot password?"/>
+            </children>
+        </Pane>
+        <Text layoutX="136.0" layoutY="361.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WELCOME TO">
+            <font>
+                <Font size="25.0"/>
+            </font>
+        </Text>
+        <Text layoutX="136.0" layoutY="449.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sipsewana Institute">
+            <font>
+                <Font name="Rockwell" size="70.0"/>
+            </font>
+        </Text>
+        <Text layoutX="136.0" layoutY="528.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter your User Name and ">
+            <font>
+                <Font size="20.0"/>
+            </font>
+        </Text>
+        <Text layoutX="136.0" layoutY="555.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password to continue">
+            <font>
+                <Font size="20.0"/>
+            </font>
+        </Text>
+    </children>
+</AnchorPane>

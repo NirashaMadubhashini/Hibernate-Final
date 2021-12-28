@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="dashBoardFormContext" prefHeight="1000.0" prefWidth="1950.0" style="-fx-background-color: #ccae62;"
+            xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="lk.sipsewanainstitute.hibernate.controller.dashBoardFormController">
+    <children>
+        <Pane layoutX="150.0" layoutY="51.0" opacity="0.64" prefHeight="921.0" prefWidth="1470.0"
+              style="-fx-background-color: #f5f6fa; -fx-background-radius: 50;" AnchorPane.bottomAnchor="28.0"
+              AnchorPane.leftAnchor="240.0" AnchorPane.rightAnchor="240.0" AnchorPane.topAnchor="51.0">
+            <effect>
+                <Blend/>
+            </effect>
+            <children>
+                <Pane layoutX="98.0" layoutY="53.0" prefHeight="455.0" prefWidth="390.0"
+                      style="-fx-border-color: black; -fx-border-radius: 60;">
+                    <children>
+                        <ImageView fitHeight="176.0" fitWidth="200.0" layoutX="107.0" layoutY="100.0"
+                                   pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../assets/img6.png"/>
+                            </image>
+                        </ImageView>
+                        <Text layoutX="139.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Student">
+                            <font>
+                                <Font name="System Bold" size="30.0"/>
+                            </font>
+                        </Text>
+                        <JFXButton layoutX="27.0" layoutY="307.0" onAction="#addStudentOnAction" prefHeight="52.0"
+                                   prefWidth="335.0" ripplerFill="BLACK"
+                                   style="-fx-background-color: #B33771; -fx-background-radius: 15;" text="Add/Manage"
+                                   textFill="WHITE">
+                            <font>
+                                <Font name="System Bold" size="22.0"/>
+                            </font>
+                            <cursor>
+                                <Cursor fx:constant="HAND"/>
+                            </cursor>
+                        </JFXButton>
+                        <JFXButton layoutX="28.0" layoutY="377.0" onAction="#studentDetailsOnAction" prefHeight="52.0"
+                                   prefWidth="335.0" ripplerFill="BLACK"
+                                   style="-fx-background-color: #FC427B; -fx-background-radius: 15;" text="View Details"
+                                   textFill="WHITE">
+                            <font>
+                                <Font name="System Bold" size="22.0"/>
+                            </font>
+                            <cursor>
+                                <Cursor fx:constant="HAND"/>
+                            </cursor>
+                        </JFXButton>
+                    </children>
+                </Pane>
+                <Pane layoutX="932.0" layoutY="53.0" prefHeight="455.0" prefWidth="390.0"
+                      style="-fx-border-color: black; -fx-border-radius: 60;">
+                    <children>
+                        <ImageView fitHeight="176.0" fitWidth="200.0" layoutX="97.0" layoutY="91.0" pickOnBounds="true"
+                                   preserveRatio="true">
+                            <image>
+                                <Image url="@../assets/img8.png"/>
+                            </image>
+                        </ImageView>
+                        <Text layoutX="66.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                              text=" Training programs">
+                            <font>
+                                <Font name="System Bold" size="30.0"/>
+                            </font>
+                        </Text>
+                        <JFXButton layoutX="34.0" layoutY="301.0" onAction="#addProgrameOnAction" prefHeight="52.0"
+                                   prefWidth="335.0" ripplerFill="BLACK"
+                                   style="-fx-background-color: #B33771; -fx-background-radius: 15;" text="Add/Manage"
+                                   textFill="WHITE">
+                            <font>
+                                <Font name="System Bold" size="22.0"/>
+                            </font>
+                            <cursor>
+                                <Cursor fx:constant="HAND"/>
+                            </cursor>
+                        </JFXButton>
+                        <JFXButton layoutX="34.0" layoutY="383.0" onAction="#projectDetailsOnAction" prefHeight="52.0"
+                                   prefWidth="335.0" ripplerFill="BLACK"
+                                   style="-fx-background-color: #FC427B; -fx-background-radius: 15;" text="View Details"
+                                   textFill="WHITE">
+                            <font>
+                                <Font name="System Bold" size="22.0"/>
+                            </font>
+                            <cursor>
+                                <Cursor fx:constant="HAND"/>
+                            </cursor>
+                        </JFXButton>
+                    </children>
+                </Pane>
+                <Pane layoutX="514.0" layoutY="432.0" prefHeight="455.0" prefWidth="390.0"
+                      style="-fx-border-color: black; -fx-border-radius: 60;">
+                    <children>
+                        <ImageView fitHeight="176.0" fitWidth="200.0" layoutX="107.0" layoutY="82.0" pickOnBounds="true"
+                                   preserveRatio="true">
+                            <image>
+                                <Image url="@../assets/img7.png"/>
+                            </image>
+                        </ImageView>
+                        <Text layoutX="109.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Registration">
+                            <font>
+                                <Font name="System Bold" size="30.0"/>
+                            </font>
+                        </Text>
+                        <JFXButton layoutX="28.0" layoutY="302.0" onAction="#RegisterOnAction" prefHeight="52.0"
+                                   prefWidth="335.0" ripplerFill="#250000"
+                                   style="-fx-background-color: #B33771; -fx-background-radius: 15;" text="Add/Manage"
+                                   textFill="WHITE">
+                            <font>
+                                <Font name="System Bold" size="22.0"/>
+                            </font>
+                            <cursor>
+                                <Cursor fx:constant="HAND"/>
+                            </cursor>
+                        </JFXButton>
+                        <JFXButton layoutX="28.0" layoutY="384.0" onAction="#registerDetailsOnAction" prefHeight="52.0"
+                                   prefWidth="335.0" ripplerFill="BLACK"
+                                   style="-fx-background-color: #FC427B; -fx-background-radius: 15;" text="View Details"
+                                   textFill="WHITE">
+                            <font>
+                                <Font name="System Bold" size="22.0"/>
+                            </font>
+                            <cursor>
+                                <Cursor fx:constant="HAND"/>
+                            </cursor>
+                        </JFXButton>
+                    </children>
+                </Pane>
+            </children>
+        </Pane>
+        <ImageView fitHeight="52.0" fitWidth="84.0" layoutX="54.0" layoutY="36.0" pickOnBounds="true"
+                   preserveRatio="true">
+            <image>
+                <Image url="@../assets/img9.png"/>
+            </image>
+        </ImageView>
+        <JFXButton layoutX="48.0" layoutY="36.0" onAction="#backOnAction" prefHeight="52.0" prefWidth="62.0"
+                   textFill="TRANSPARENT"/>
+    </children>
+</AnchorPane>

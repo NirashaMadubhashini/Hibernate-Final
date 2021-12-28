@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="updateStudentFormContext" prefHeight="700.0" prefWidth="775.0" style="-fx-background-color: #ff7675;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.sipsewanainstitute.hibernate.controller.updateStudentFormController">
+    <children>
+        <Pane layoutX="53.0" layoutY="143.0" prefHeight="459.0" prefWidth="670.0" style="-fx-border-color: black; -fx-border-radius: 30;">
+            <children>
+                <TextField fx:id="txtUpdateName" layoutX="233.0" layoutY="31.0" prefHeight="35.0" prefWidth="329.0">
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </TextField>
+                <Text layoutX="122.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Full Name">
+                    <font>
+                        <Font name="System Bold" size="20.0" />
+                    </font>
+                </Text>
+                <TextField fx:id="txtUpdateAddress" layoutX="232.0" layoutY="157.0" prefHeight="35.0" prefWidth="329.0">
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </TextField>
+                <Text layoutX="142.0" layoutY="182.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Address">
+                    <font>
+                        <Font name="System Bold" size="20.0" />
+                    </font>
+                </Text>
+                <TextField fx:id="txtUpdateAge" layoutX="233.0" layoutY="220.0" prefHeight="35.0" prefWidth="89.0">
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </TextField>
+                <Text layoutX="180.0" layoutY="244.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Age">
+                    <font>
+                        <Font name="System Bold" size="20.0" />
+                    </font>
+                </Text>
+                <TextField fx:id="txtUpdateMobile" layoutX="232.0" layoutY="282.0" prefHeight="35.0" prefWidth="329.0">
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </TextField>
+                <Text layoutX="70.0" layoutY="307.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mobile Number">
+                    <font>
+                        <Font name="System Bold" size="20.0" />
+                    </font>
+                </Text>
+                <Text layoutX="348.0" layoutY="244.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gender">
+                    <font>
+                        <Font name="System Bold" size="20.0" />
+                    </font>
+                </Text>
+                <TextField fx:id="txtUpdateGender" layoutX="425.0" layoutY="218.0" prefHeight="35.0" prefWidth="139.0">
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </TextField>
+                <Text layoutX="109.0" layoutY="119.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date f Birth">
+                    <font>
+                        <Font name="System Bold" size="20.0" />
+                    </font>
+                </Text>
+                <TextField fx:id="txtUpdateBirthDay" layoutX="232.0" layoutY="94.0" prefHeight="35.0" prefWidth="329.0">
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </TextField>
+                <JFXButton fx:id="btnUpdateStudent" layoutX="221.0" layoutY="383.0" onAction="#UpdateStudentOnAction" prefHeight="50.0" prefWidth="235.0" ripplerFill="BLACK" style="-fx-background-color: #B33771; -fx-background-radius: 15;" text="Update" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="22.0" />
+                    </font>
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </JFXButton>
+            </children>
+        </Pane>
+        <Text fill="WHITE" layoutX="137.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Update Student Form">
+            <font>
+                <Font name="Rockwell" size="50.0" />
+            </font>
+        </Text>
+    </children>
+</AnchorPane>

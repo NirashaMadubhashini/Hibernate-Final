@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="allStudentFormContext" prefHeight="1000.0" prefWidth="1950.0" style="-fx-background-color: #ffb8b8;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.sipsewanainstitute.hibernate.controller.allStudentFormController">
+    <children>
+        <Text layoutX="161.0" layoutY="88.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Student Details Form">
+            <font>
+                <Font name="Rockwell" size="50.0" />
+            </font>
+        </Text>
+        <ImageView fitHeight="52.0" fitWidth="84.0" layoutX="71.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../assets/img9.png" />
+            </image>
+        </ImageView>
+        <JFXButton layoutX="65.0" layoutY="41.0" onAction="#backToStudentDetailDashBoardOnAction" prefHeight="52.0" prefWidth="62.0" textFill="TRANSPARENT" />
+        <TableView fx:id="tblStudentDetail" layoutX="173.0" layoutY="211.0" prefHeight="536.0" prefWidth="1511.0" style="-fx-background-color: #f7f1e3; -fx-background-radius: 5;" AnchorPane.bottomAnchor="253.0" AnchorPane.leftAnchor="173.0" AnchorPane.rightAnchor="266.0" AnchorPane.topAnchor="279.0">
+            <columns>
+                <TableColumn fx:id="colStudentDetailName" prefWidth="219.0" text="Name" />
+                <TableColumn fx:id="colStudentDetailNIC" prefWidth="175.0" text="NIC" />
+                <TableColumn fx:id="colStudentDetailBirthDay" prefWidth="174.0" text="Date of Birth" />
+                <TableColumn fx:id="colStudentDetailAddress" prefWidth="193.0" text="Address" />
+                <TableColumn fx:id="colStudentDetailAge" prefWidth="101.0" text="Age" />
+                <TableColumn fx:id="colStudentDetailMobile" prefWidth="171.0" text="Mobile" />
+                <TableColumn fx:id="colStudentDetailGender" prefWidth="137.0" text="Gender" />
+                <TableColumn fx:id="colStudentDetailDate" prefWidth="171.0" text="Date" />
+                <TableColumn fx:id="colStudentDetailTime" prefWidth="168.0" text="Time" />
+            </columns>
+        </TableView>
+      <Text layoutX="173.0" layoutY="243.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Student NIC :">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Text>
+      <TextField fx:id="txtSearchStudentNIC" layoutX="339.0" layoutY="217.0" prefHeight="39.0" prefWidth="309.0" promptText="Search Here" />
+    </children>
+</AnchorPane>
