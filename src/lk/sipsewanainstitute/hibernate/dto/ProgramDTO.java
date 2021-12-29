@@ -20,6 +20,13 @@ public class ProgramDTO {
         this.time = time;
     }
 
+    public ProgramDTO(String programId, String programName, String duration, double fee) {
+        this.programID = programID;
+        this.programName = programName;
+        this.duration = duration;
+        this.fee = fee;
+    }
+
     public String getProgramID() {
         return programID;
     }

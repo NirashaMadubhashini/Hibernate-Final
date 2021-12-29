@@ -6,6 +6,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -62,6 +63,9 @@ public class programFormController {
 
         loadDateAndTime();
         tableListener();
+        loadAllPrograms();
+
+        updateProgramFormController.programFormContext=programFormContext;
     }
 
     private void tableListener() {
@@ -115,7 +119,7 @@ public class programFormController {
                 new Alert(Alert.AlertType.ERROR, programID + " already exists").show();
 
             } else {
-                ProgramDTO programDTO= new ProgramDTO(programID, programName, programDuration, parseFee, programDate,programTime);
+                ProgramDTO programDTO = new ProgramDTO(programID, programName, programDuration, parseFee, programDate, programTime);
                 programBO.add(programDTO);
 
                 new Alert(Alert.AlertType.CONFIRMATION, "Saved..").show();
@@ -129,10 +133,10 @@ public class programFormController {
             e.printStackTrace();
         }
 
-        loadAllStudent();
+        loadAllPrograms();
     }
 
-    private void loadAllStudent() {
+    private void loadAllPrograms() {
         tblProgram.getItems().clear();
         try {
             List<ProgramDTO> all = programBO.findAll();
@@ -142,7 +146,7 @@ public class programFormController {
                 Button btnDelete = new Button("Delete");
 
                 tblProgram.getItems().add(new ProgramTM(allPrograms.getProgramID(), allPrograms.getProgramName(), allPrograms.getDuration(),
-                        allPrograms.getFee(), allPrograms.getDate(),allPrograms.getTime(),btnUpdate, btnDelete));
+                        allPrograms.getFee(), allPrograms.getDate(), allPrograms.getTime(), btnUpdate, btnDelete));
 
                 btnDelete.setOnAction((e) -> {
                     ButtonType yes = new ButtonType("Yes", ButtonBar.ButtonData.OK_DONE);
@@ -156,9 +160,9 @@ public class programFormController {
                     if (result.orElse(no) == yes) {
 
                         try {
-//                            delete(allPrograms);
+                            delete(allPrograms);
                             all.remove(allPrograms);
-                            loadAllStudent();
+                            loadAllPrograms();
                         } catch (Exception exception) {
                             exception.printStackTrace();
                         }
@@ -169,7 +173,7 @@ public class programFormController {
 
                 btnUpdate.setOnAction((e) -> {
                     try {
-//                        showUpdateForm(allStudent);
+                        showUpdateForm(allPrograms);
                     } catch (Exception ex) {
                         ex.printStackTrace();
                     }
@@ -185,6 +189,35 @@ public class programFormController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void delete(ProgramDTO dto) throws Exception {
+        String programName=tblProgram.getSelectionModel().getSelectedItem().getProgramID();
+        try {
+            if (!existProgram(programName)){
+                new Alert(Alert.AlertType.CONFIRMATION,"Successfully Deleted.. "+programName).show();
+            }
+            programBO.delete(programName);
+            tblProgram.getItems().remove(tblProgram.getSelectionModel().getSelectedItem());
+            tblProgram.getSelectionModel().clearSelection();
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR,"Failed to delete the customer "+programName ).show();
+        }catch (ClassNotFoundException e){
+            e.printStackTrace();
+        }
+    }
+
+    private void showUpdateForm(ProgramDTO table) throws IOException {
+        FXMLLoader loader=new FXMLLoader(this.getClass().getResource("../view/updateProgramForm.fxml"));
+        Parent parent=loader.load();
+        updateProgramFormController controller=loader.<updateProgramFormController>getController();
+        controller.txtUpdateProgram.setText(table.getProgramName());
+        controller.txtUpdateDuration.setText(table.getDuration());
+        controller.txtUpdateFee.setText(String.valueOf(table.getFee()));
+        controller.programId=table.getProgramID();
+        Stage stage=new Stage();
+        stage.setScene(new Scene(parent));
+        stage.show();
     }
 
     public void backToProgramDashBoardOnAction(ActionEvent actionEvent) throws IOException {

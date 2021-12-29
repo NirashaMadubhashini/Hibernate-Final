@@ -8,53 +8,61 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="updateProgramFormContext" prefHeight="700.0" prefWidth="775.0" style="-fx-background-color: #ff7675;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.sipsewanainstitute.hibernate.controller.updateProgramFormController">
+<AnchorPane fx:id="updateProgramFormContext" prefHeight="700.0" prefWidth="775.0" style="-fx-background-color: #ff7675;"
+            xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="lk.sipsewanainstitute.hibernate.controller.updateProgramFormController">
     <children>
-        <Pane layoutX="53.0" layoutY="150.0" prefHeight="459.0" prefWidth="670.0" style="-fx-border-color: black; -fx-border-radius: 30;">
+        <Pane layoutX="53.0" layoutY="150.0" prefHeight="459.0" prefWidth="670.0"
+              style="-fx-border-color: black; -fx-border-radius: 30;">
             <children>
                 <TextField fx:id="txtUpdateProgram" layoutX="234.0" layoutY="59.0" prefHeight="35.0" prefWidth="329.0">
                     <cursor>
-                        <Cursor fx:constant="HAND" />
+                        <Cursor fx:constant="HAND"/>
                     </cursor>
                 </TextField>
                 <TextField fx:id="txtUpdateFee" layoutX="236.0" layoutY="239.0" prefHeight="35.0" prefWidth="329.0">
                     <cursor>
-                        <Cursor fx:constant="HAND" />
+                        <Cursor fx:constant="HAND"/>
                     </cursor>
                 </TextField>
-                <TextField fx:id="txtUpdateDuration" layoutX="233.0" layoutY="146.0" prefHeight="35.0" prefWidth="329.0">
+                <TextField fx:id="txtUpdateDuration" layoutX="233.0" layoutY="146.0" prefHeight="35.0"
+                           prefWidth="329.0">
                     <cursor>
-                        <Cursor fx:constant="HAND" />
+                        <Cursor fx:constant="HAND"/>
                     </cursor>
                 </TextField>
-                <JFXButton layoutX="221.0" layoutY="383.0" onAction="#UpdateProgramOnAction" prefHeight="50.0" prefWidth="235.0" ripplerFill="BLACK" style="-fx-background-color: #B33771; -fx-background-radius: 15;" text="Update" textFill="WHITE">
+                <JFXButton fx:id="btnUpdateProgram" layoutX="221.0" layoutY="383.0" onAction="#UpdateProgramOnAction"
+                           prefHeight="50.0" prefWidth="235.0" ripplerFill="BLACK"
+                           style="-fx-background-color: #B33771; -fx-background-radius: 15;" text="Update"
+                           textFill="WHITE">
                     <font>
-                        <Font name="System Bold" size="22.0" />
+                        <Font name="System Bold" size="22.0"/>
                     </font>
                     <cursor>
-                        <Cursor fx:constant="HAND" />
+                        <Cursor fx:constant="HAND"/>
                     </cursor>
                 </JFXButton>
                 <Text layoutX="130.0" layoutY="171.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Duration">
                     <font>
-                        <Font name="System Bold" size="20.0" />
+                        <Font name="System Bold" size="20.0"/>
                     </font>
                 </Text>
                 <Text layoutX="130.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Program ">
                     <font>
-                        <Font name="System Bold" size="20.0" />
+                        <Font name="System Bold" size="20.0"/>
                     </font>
                 </Text>
                 <Text layoutX="130.0" layoutY="264.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fee (LKR)">
                     <font>
-                        <Font name="System Bold" size="20.0" />
+                        <Font name="System Bold" size="20.0"/>
                     </font>
                 </Text>
             </children>
         </Pane>
-        <Text fill="WHITE" layoutX="147.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Update Program Form">
+        <Text fill="WHITE" layoutX="147.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0"
+              text="Update Program Form">
             <font>
-                <Font name="Rockwell" size="50.0" />
+                <Font name="Rockwell" size="50.0"/>
             </font>
         </Text>
     </children>
