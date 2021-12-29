@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public interface RegisterBO extends SuperBO {
-    List<RegisterDTO> findAll() throws SQLException, ClassNotFoundException;
+    List<RegisterDTO> findAll() throws Exception;
 
     boolean add(RegisterDTO registerDTO) throws Exception;
 
@@ -16,7 +16,7 @@ public interface RegisterBO extends SuperBO {
 
     boolean ifRegisterExist(String id) throws SQLException, ClassNotFoundException;
 
-    boolean delete(String id) throws SQLException, ClassNotFoundException;
+    boolean delete(String id) throws Exception;
 
     boolean find(String value) throws SQLException, ClassNotFoundException;
 }

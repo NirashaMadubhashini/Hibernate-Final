@@ -6,6 +6,8 @@ import lk.sipsewanainstitute.hibernate.util.FactoryConfiguration;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import javax.persistence.Query;
+import java.sql.SQLException;
 import java.util.List;
 
 public class RegisterDAOImpl implements RegisterDAO {
@@ -34,7 +36,7 @@ public class RegisterDAOImpl implements RegisterDAO {
     }
 
     @Override
-    public boolean delete(Register id) throws Exception {
+    public boolean delete(String id) throws Exception {
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
 
@@ -54,64 +56,22 @@ public class RegisterDAOImpl implements RegisterDAO {
 
     @Override
     public List<Register> findAll() throws Exception {
-        return null;
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+
+        List<Register> list = null;
+
+        Query registers = session.createQuery("from Register");
+        list = registers.getResultList();
+
+        transaction.commit();
+
+        session.close();
+        return list;
     }
-//    @Override
-//    public boolean add(Register entity) throws Exception {
-//        Session session= FactoryConfiguration.getInstance().getSession();
-//        Transaction transaction=session.beginTransaction();
-//
-//        session.save(entity);
-//
-//        transaction.commit();
-//        session.close();
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean update(Register entity) throws Exception {
-//        Session session = FactoryConfiguration.getInstance().getSession();
-//
-//        Transaction transaction = session.beginTransaction();
-//
-//        session.update(entity);
-//
-//        transaction.commit();
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean delete(String s) throws Exception {
-//        Session session = FactoryConfiguration.getInstance().getSession();
-//        Transaction transaction = session.beginTransaction();
-//
-//        Register register= session.get(Register.class, s);
-//
-//        session.delete(register);
-//
-//        transaction.commit();
-//        session.close();
-//        return true;
-//    }
-//
-//    @Override
-//    public Register find(String s) throws Exception {
-//        return null;
-//    }
-//
-//    @Override
-//    public List<Register> findAll() throws Exception {
-//        Session session = FactoryConfiguration.getInstance().getSession();
-//        Transaction transaction = session.beginTransaction();
-//
-//        List<Register> list = null;
-//
-//        Query registers = session.createQuery("from Register");
-//        list = registers.list();
-//
-//        transaction.commit();
-//
-//        session.close();
-//        return list;
-//    }
+
+    @Override
+    public boolean ifRegisterExist(String id) throws SQLException, ClassNotFoundException {
+        return false;
+    }
 }

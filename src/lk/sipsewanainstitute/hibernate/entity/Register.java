@@ -10,7 +10,8 @@ public class Register implements SuperEntity{
     private String registerID;
     private String orderDate;
     private String orderTime;
-    @ManyToOne
+
+    @ManyToOne(cascade = CascadeType.ALL)
 //    @JoinColumn(name = "student_id", referencedColumnName = "nic")
 //    @Column(name = "student_id")
     private Student student;
@@ -23,6 +24,11 @@ public class Register implements SuperEntity{
         this.orderDate = orderDate;
         this.orderTime = orderTime;
         this.student = student;
+    }
+    public Register(String registerID, String orderDate, String orderTime) {
+        this.registerID = registerID;
+        this.orderDate = orderDate;
+        this.orderTime = orderTime;
     }
 
     public Register(String registerID, String orderDate, String orderTime, String nic) {
