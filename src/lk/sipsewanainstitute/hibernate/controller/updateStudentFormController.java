@@ -43,7 +43,7 @@ public class updateStudentFormController {
             Stage stage = (Stage) btnUpdateStudent.getScene().getWindow();
             stage.close();
 
-            refreshCustomerUpdate(updateStudent);
+            refreshStudentUpdate(updateStudent);
 
         } catch (SQLException e) {
         } catch (ClassNotFoundException e) {
@@ -56,7 +56,7 @@ public class updateStudentFormController {
     }
 
 
-    private void refreshCustomerUpdate(boolean updateStudent) throws IOException {
+    private void refreshStudentUpdate(boolean updateStudent) throws IOException {
         ButtonType yes = new ButtonType("Yes", ButtonBar.ButtonData.YES);
         ButtonType no = new ButtonType("No", ButtonBar.ButtonData.NO);
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Updated..", yes, no);
