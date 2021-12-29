@@ -6,6 +6,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -72,9 +73,11 @@ public class studentFormController {
 
         loadDateAndTime();
         tableListener();
-
+        loadAllStudent();
 
         cmdGender.getItems().addAll("Male", "Female");
+
+        updateStudentFormController.studentFormContext =studentFormContext;
     }
 
     private void tableListener() {
@@ -92,7 +95,7 @@ public class studentFormController {
             txtAddress.setText(tm.getAddress());
             txtAge.setText(String.valueOf(tm.getAge()));
             txtMobile.setText(tm.getMobileNumber());
-            cmdGender.setValue(tm.getAddress());
+            cmdGender.setValue(tm.getGender());
             txtStudentDate.setText(tm.getDate());
             txtStudentTime.setText(tm.getTime());
         } catch (Exception e) {
@@ -139,7 +142,7 @@ public class studentFormController {
 
             } else {
 
-                StudentDTO studentDTO = new StudentDTO(nic, name, birthDay, address, age, mobileNumber, gender, date, time);
+                StudentDTO studentDTO = new StudentDTO(nic,name, birthDay, address, age, mobileNumber, gender, date, time);
                 studentBO.add(studentDTO);
 
                 new Alert(Alert.AlertType.CONFIRMATION, "Saved..").show();
@@ -150,7 +153,6 @@ public class studentFormController {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-
         loadAllStudent();
     }
 
@@ -163,7 +165,7 @@ public class studentFormController {
                 Button btnUpdate = new Button("Update");
                 Button btnDelete = new Button("Delete");
 
-                tblStudent.getItems().add(new StudentTM(allStudents.getNic(), allStudents.getName(), allStudents.getBirthDay(),
+                tblStudent.getItems().add(new StudentTM(allStudents.getName(), allStudents.getNic(), allStudents.getBirthDay(),
                         allStudents.getAddress(), allStudents.getAge(), allStudents.getMobileNumber(), allStudents.getGender(), allStudents.getDate(), allStudents.getTime(),
                         btnUpdate, btnDelete));
 
@@ -179,7 +181,7 @@ public class studentFormController {
                     if (result.orElse(no) == yes) {
 
                         try {
-//                            delete(allStudent);
+                            delete(allStudents);
                             all.remove(allStudents);
                             loadAllStudent();
                         } catch (Exception exception) {
@@ -192,10 +194,7 @@ public class studentFormController {
 
                 btnUpdate.setOnAction((e) -> {
                     try {
-
-//                        showUpdateForm(allStudent);
-
-
+                        showUpdateForm(allStudents);
                     } catch (Exception ex) {
                         ex.printStackTrace();
                     }
@@ -204,13 +203,43 @@ public class studentFormController {
 
             }
 
-        } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         } catch (ClassNotFoundException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
+    private void delete(StudentDTO dto) throws Exception {
+        String name = tblStudent.getSelectionModel().getSelectedItem().getNic();
+        try {
+            if (!existStudent(name)) {
+                new Alert(Alert.AlertType.CONFIRMATION, "Successfully Deleted.. " + name).show();
+            }
+            studentBO.delete(name);
+            tblStudent.getItems().remove(tblStudent.getSelectionModel().getSelectedItem());
+            tblStudent.getSelectionModel().clearSelection();
 
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, "Failed to delete the customer " + name).show();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    private void showUpdateForm(StudentDTO table) throws IOException {
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/lk/sipsewanainstitute/hibernate/view/updateStudentForm.fxml"));
+        Parent parent = loader.load();
+        updateStudentFormController controller= loader.<updateStudentFormController>getController();
+        controller.txtUpdateName.setText(table.getName());
+        controller.txtUpdateBirthDay.setText(table.getBirthDay());
+        controller.txtUpdateAddress.setText(table.getAddress());
+        controller.txtUpdateAge.setText(String.valueOf(table.getAge()));
+        controller.txtUpdateGender.setText(table.getGender());
+        controller.txtUpdateMobile.setText(table.getMobileNumber());
+        controller.nic=table.getNic();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(parent));
+        stage.show();
+    }
     public void backToStudentDashBoardOnAction(ActionEvent actionEvent) throws IOException {
         Stage window = (Stage) studentFormContext.getScene().getWindow();
         window.setScene(new Scene(FXMLLoader.load(getClass().getResource("/lk/sipsewanainstitute/hibernate/view/dashBoardForm.fxml"))));
