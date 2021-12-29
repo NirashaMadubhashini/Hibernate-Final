@@ -14,7 +14,7 @@ public class Program implements SuperEntity{
     private String date;
     private String time;
 
-    @ManyToMany(mappedBy = "programList", fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "programList", fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     private List<Student> studentList = new ArrayList<>();
 
     public Program() {

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public interface ProgramBO extends SuperBO {
-    List<ProgramDTO> findAll() throws SQLException, ClassNotFoundException;
+    List<ProgramDTO> findAll() throws Exception;
 
     boolean add(ProgramDTO programDTO) throws Exception;
 
@@ -17,7 +17,7 @@ public interface ProgramBO extends SuperBO {
 
     boolean ifProgramExist(String id) throws SQLException, ClassNotFoundException;
 
-    boolean delete(String id) throws SQLException, ClassNotFoundException;
+    boolean delete(String id) throws Exception;
 
     boolean find(String value) throws SQLException, ClassNotFoundException;
 

@@ -7,6 +7,7 @@ import lk.sipsewanainstitute.hibernate.util.FactoryConfiguration;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class ProgramDAOImpl implements ProgramDAO {
@@ -35,7 +36,7 @@ public class ProgramDAOImpl implements ProgramDAO {
     }
 
     @Override
-    public boolean delete(Program id) throws Exception {
+    public boolean delete(String id) throws Exception {
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
 
@@ -56,6 +57,11 @@ public class ProgramDAOImpl implements ProgramDAO {
     @Override
     public List<Program> findAll() throws Exception {
         return null;
+    }
+
+    @Override
+    public boolean ifProgramExist(String id) throws SQLException, ClassNotFoundException {
+        return false;
     }
 
 //    @Override
