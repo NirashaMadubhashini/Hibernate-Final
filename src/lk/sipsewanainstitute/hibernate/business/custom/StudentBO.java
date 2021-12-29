@@ -2,15 +2,15 @@ package lk.sipsewanainstitute.hibernate.business.custom;
 
 
 import lk.sipsewanainstitute.hibernate.business.SuperBO;
-import lk.sipsewanainstitute.hibernate.dto.ProgramDTO;
 import lk.sipsewanainstitute.hibernate.dto.StudentDTO;
+import lk.sipsewanainstitute.hibernate.entity.Student;
 
 import java.sql.SQLException;
 import java.util.List;
 
 public interface StudentBO  extends SuperBO {
 
-    List<StudentDTO> findAll() throws SQLException, ClassNotFoundException;
+    List<StudentDTO> findAll() throws Exception;
 
     boolean add(StudentDTO studentDTO) throws Exception;
 
@@ -18,7 +18,7 @@ public interface StudentBO  extends SuperBO {
 
     boolean ifStudentExist(String id) throws SQLException, ClassNotFoundException;
 
-    boolean delete(String id) throws SQLException, ClassNotFoundException;
+    boolean delete(String id) throws Exception;
 
     boolean find(String value) throws SQLException, ClassNotFoundException;
 }

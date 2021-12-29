@@ -4,11 +4,8 @@ import com.jfoenix.controls.JFXButton;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -17,7 +14,6 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import lk.sipsewanainstitute.hibernate.business.BOFactory;
 import lk.sipsewanainstitute.hibernate.business.custom.StudentBO;
-import lk.sipsewanainstitute.hibernate.business.custom.impl.StudentBOImpl;
 import lk.sipsewanainstitute.hibernate.dto.StudentDTO;
 import lk.sipsewanainstitute.hibernate.view.tm.StudentTM;
 
@@ -25,7 +21,6 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -77,7 +72,7 @@ public class studentFormController {
 
         loadDateAndTime();
         tableListener();
-        loadAllStudent();
+
 
         cmdGender.getItems().addAll("Male", "Female");
     }
@@ -123,6 +118,10 @@ public class studentFormController {
         time.play();
     }
 
+    boolean existStudent(String nic) throws SQLException, ClassNotFoundException {
+        return studentBO.ifStudentExist(nic);
+    }
+
     public void addNewStudentOnAction(ActionEvent actionEvent) throws Exception {
         String nic = txtNIC.getText();
         String name = txtName.getText();
@@ -135,17 +134,7 @@ public class studentFormController {
         String time = txtStudentTime.getText();
 
         try {
-            if (studentBO.add(new StudentDTO(
-                    nic,
-                    name,
-                    birthDay,
-                    address,
-                    age,
-                    mobileNumber,
-                    gender,
-                    date,
-                    time
-            ))) {
+            if (existStudent(nic)) {
                 new Alert(Alert.AlertType.ERROR, nic + " already exists").show();
 
             } else {
@@ -162,56 +151,20 @@ public class studentFormController {
             e.printStackTrace();
         }
 
-//        try {
-//            if (studentBOImpl.add(new StudentDTO(
-//                    nic,
-//                    name,
-//                    birthDay,
-//                    address,
-//                    age,
-//                    mobileNumber,
-//                    gender,
-//                    date,
-//                    time
-//            ))) {
-//                new Alert(Alert.AlertType.ERROR, nic + " already exists").show();
-//
-//            } else {
-//
-//                txtNIC.setText(null);
-//                txtName.setText(null);
-//                txtBirth.setText(null);
-//                txtAddress.setText(null);
-//                txtAge.setText(null);
-//                txtMobile.setText(null);
-//                cmdGender.setValue(null);
-//                txtStudentDate.setText(null);
-//                txtStudentTime.setText(null);
-//                loadAllStudent();
-//
-//                new Alert(Alert.AlertType.CONFIRMATION, "Saved..").show();
-//            }
-//
-//        } catch (SQLException e) {
-//            new Alert(Alert.AlertType.ERROR, "Failed to save the customer " + e.getMessage()).show();
-//        } catch (ClassNotFoundException e) {
-//            e.printStackTrace();
-//        }
-
+        loadAllStudent();
     }
 
     private void loadAllStudent() throws Exception {
         tblStudent.getItems().clear();
         try {
-//            ObservableList<StudentTM> tmList = FXCollections.observableArrayList();
             List<StudentDTO> all = studentBO.findAll();
-            for (StudentDTO temp : all) {
+            for (StudentDTO allStudents: all) {
 
                 Button btnUpdate = new Button("Update");
                 Button btnDelete = new Button("Delete");
 
-                tblStudent.getItems().add(new StudentTM(temp.getNic(), temp.getName(), temp.getBirthDay(),
-                        temp.getAddress(), temp.getAge(),temp.getMobileNumber(), temp.getGender(),temp.getDate(),temp.getTime(),
+                tblStudent.getItems().add(new StudentTM(allStudents.getNic(), allStudents.getName(), allStudents.getBirthDay(),
+                        allStudents.getAddress(), allStudents.getAge(), allStudents.getMobileNumber(), allStudents.getGender(), allStudents.getDate(), allStudents.getTime(),
                         btnUpdate, btnDelete));
 
                 btnDelete.setOnAction((e) -> {
@@ -226,8 +179,8 @@ public class studentFormController {
                     if (result.orElse(no) == yes) {
 
                         try {
-                            delete(temp);
-                            all.remove(temp);
+//                            delete(allStudent);
+                            all.remove(allStudents);
                             loadAllStudent();
                         } catch (Exception exception) {
                             exception.printStackTrace();
@@ -240,7 +193,7 @@ public class studentFormController {
                 btnUpdate.setOnAction((e) -> {
                     try {
 
-                        showUpdateForm(temp);
+//                        showUpdateForm(allStudent);
 
 
                     } catch (Exception ex) {
@@ -256,97 +209,6 @@ public class studentFormController {
         } catch (ClassNotFoundException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
-//        try {
-//            ObservableList<StudentTM> tmList = FXCollections.observableArrayList();
-//            List<StudentDTO> all = studentBOImpl.findAll();
-//            for (StudentDTO dto : all) {
-//                Button btnUpdate = new Button("Update");
-//                Button btnDelete = new Button("Delete");
-//                StudentTM tm = new StudentTM(
-//                        dto.getNic(),
-//                        dto.getName(),
-//                        dto.getBirthDay(),
-//                        dto.getAddress(),
-//                        dto.getAge(),
-//                        dto.getMobileNumber(),
-//                        dto.getGender(),
-//                        dto.getDate(),
-//                        dto.getTime(),
-//                        btnUpdate,
-//                        btnDelete
-//                );
-//                tmList.add(tm);
-//                btnUpdate.setOnAction((e) -> {
-//                    try {
-//
-//                        showUpdateForm(dto);
-//
-//
-//                    } catch (Exception ex) {
-//                        ex.printStackTrace();
-//                    }
-//
-//                });
-//
-//                btnDelete.setOnAction((e) -> {
-//                    ButtonType yes = new ButtonType("Yes", ButtonBar.ButtonData.OK_DONE);
-//                    ButtonType no = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
-//
-//                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
-//                            "Are you sure you want to delete this Supplier?", yes, no);
-//                    alert.setTitle("Conformation Alert");
-//                    Optional<ButtonType> result = alert.showAndWait();
-//
-//                    if (result.orElse(no) == yes) {
-//                        try {
-//                            deleteCustomer(dto);
-//                            all.remove(dto);
-//                            loadAllStudent();
-//                        } catch (Exception exception) {
-//                            exception.printStackTrace();
-//                        }
-//                    }
-//
-//                });
-//            }
-//            tblStudent.setItems(tmList);
-//        } catch (Exception e) {
-//        }
-
-    }
-
-    private void delete(StudentDTO dto) throws Exception {
-        String name = tblStudent.getSelectionModel().getSelectedItem().getNic();
-        try {
-            if (studentBO.delete(dto.getNic())) {
-                new Alert(Alert.AlertType.ERROR, "There is no such customer associated with the id " + name).show();
-            }
-            studentBO.delete(name);
-            tblStudent.getItems().remove(tblStudent.getSelectionModel().getSelectedItem());
-            tblStudent.getSelectionModel().clearSelection();
-
-        } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR, "Failed to delete the customer " + name).show();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
-
-
-    private void showUpdateForm(StudentDTO dto) throws IOException {
-        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/lk/sipsewanainstitute/hibernate/view/updateStudentForm.fxml"));
-        Parent parent = loader.load();
-        updateStudentFormController studentFormController= loader.<updateStudentFormController>getController();
-        txtName.setText(dto.getName());
-        txtBirth.setText(dto.getBirthDay());
-        txtAddress.setText(dto.getAddress());
-        txtAge.setText(String.valueOf(dto.getAge()));
-        cmdGender.setValue(dto.getGender());
-        txtMobile.setText(dto.getMobileNumber());
-        txtNIC.setText(dto.getNic());
-        Stage stage = new Stage();
-        stage.setScene(new Scene(parent));
-        stage.show();
     }
 
     public void backToStudentDashBoardOnAction(ActionEvent actionEvent) throws IOException {

@@ -2,14 +2,14 @@ package lk.sipsewanainstitute.hibernate.dao.custom.impl;
 
 
 import lk.sipsewanainstitute.hibernate.dao.custom.StudentDAO;
-import lk.sipsewanainstitute.hibernate.entity.Program;
-import lk.sipsewanainstitute.hibernate.entity.Register;
 import lk.sipsewanainstitute.hibernate.entity.Student;
 import lk.sipsewanainstitute.hibernate.util.FactoryConfiguration;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.query.Query;
 
+import javax.persistence.Query;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class StudentDAOImpl implements StudentDAO {
@@ -38,7 +38,7 @@ public class StudentDAOImpl implements StudentDAO {
     }
 
     @Override
-    public boolean delete(Student id) throws Exception {
+    public boolean delete(String id) throws Exception {
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
 
@@ -51,6 +51,7 @@ public class StudentDAOImpl implements StudentDAO {
         return true;
     }
 
+
     @Override
     public Student find(String s) throws Exception {
         return null;
@@ -58,65 +59,22 @@ public class StudentDAOImpl implements StudentDAO {
 
     @Override
     public List<Student> findAll() throws Exception {
-        return null;
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+
+        List<Student> list = null;
+
+        Query students = session.createQuery("from Student");
+        list = students.getResultList();
+
+        transaction.commit();
+
+        session.close();
+        return list;
     }
 
-//    @Override
-//    public boolean add(Student entity) throws Exception {
-//        Session session= FactoryConfiguration.getInstance().getSession();
-//        Transaction transaction=session.beginTransaction();
-//
-//        session.save(entity);
-//
-//        transaction.commit();
-//        session.close();
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean update(Student entity) throws Exception {
-//        Session session = FactoryConfiguration.getInstance().getSession();
-//
-//        Transaction transaction = session.beginTransaction();
-//
-//        session.update(entity);
-//
-//        transaction.commit();
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean delete(String s) throws Exception {
-//        Session session = FactoryConfiguration.getInstance().getSession();
-//        Transaction transaction = session.beginTransaction();
-//
-//        Student student= session.get(Student.class, s);
-//
-//        session.delete(student);
-//
-//        transaction.commit();
-//        session.close();
-//        return true;
-//    }
-//
-//    @Override
-//    public Student find(String s) throws Exception {
-//        return null;
-//    }
-//
-//    @Override
-//    public List<Student> findAll() throws Exception {
-//        Session session = FactoryConfiguration.getInstance().getSession();
-//        Transaction transaction = session.beginTransaction();
-//
-//        List<Student> list = null;
-//
-//        Query students = session.createQuery("from Student");
-//        list = students.list();
-//
-//        transaction.commit();
-//
-//        session.close();
-//        return list;
-//    }
+    @Override
+    public boolean ifStudentExist(String id) throws SQLException, ClassNotFoundException {
+        return false;
+    }
 }

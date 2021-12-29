@@ -17,7 +17,7 @@ public class Student implements SuperEntity{
     private String date;
     private String time;
 
-    @OneToMany(mappedBy = "student")
+    @OneToMany(mappedBy = "student",cascade = CascadeType.ALL)
     private List<Register> registers;
 
     @ManyToMany(fetch = FetchType.EAGER)
@@ -42,6 +42,15 @@ public class Student implements SuperEntity{
     }
 
     public Student(String nic, String name, String birthDay, String address, int age, String mobileNumber, String gender, String date, String time) {
+        this.nic = nic;
+        this.name = name;
+        this.birthDay = birthDay;
+        this.address = address;
+        this.age = age;
+        this.mobileNumber = mobileNumber;
+        this.gender = gender;
+        this.date = date;
+        this.time = time;
     }
 
     public Student(String name, String birthDay, String address, int age, String mobileNumber, String gender) {

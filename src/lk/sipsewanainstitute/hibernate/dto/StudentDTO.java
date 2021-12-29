@@ -11,6 +11,7 @@ public class StudentDTO {
     private String date;
     private String time;
 
+
     public StudentDTO() {
     }
 
@@ -26,14 +27,14 @@ public class StudentDTO {
         this.time = time;
     }
 
-    public StudentDTO(String name, String birthDay, String address, int age, String mobileNumber, String gender){
-        this.name = name;
-        this.birthDay = birthDay;
-        this.address = address;
-        this.age = age;
-        this.mobileNumber = mobileNumber;
-        this.gender = gender;
-    }
+//    public StudentDTO(String name, String birthDay, String address, int age, String mobileNumber, String gender){
+//        this.name = name;
+//        this.birthDay = birthDay;
+//        this.address = address;
+//        this.age = age;
+//        this.mobileNumber = mobileNumber;
+//        this.gender = gender;
+//    }
 
     public String getNic() {
         return nic;
