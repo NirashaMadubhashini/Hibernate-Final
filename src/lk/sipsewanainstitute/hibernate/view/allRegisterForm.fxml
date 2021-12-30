@@ -3,7 +3,6 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -23,7 +22,7 @@
                 <Font name="Rockwell" size="50.0" />
             </font>
         </Text>
-        <TableView fx:id="tblRegisterDetail" layoutX="207.0" layoutY="254.0" prefHeight="536.0" prefWidth="1462.0" style="-fx-background-color: #f7f1e3; -fx-background-radius: 5;" AnchorPane.bottomAnchor="210.0" AnchorPane.leftAnchor="207.0" AnchorPane.rightAnchor="281.0" AnchorPane.topAnchor="279.0">
+        <TableView fx:id="tblRegisterDetail" layoutX="207.0" layoutY="254.0" prefHeight="536.0" prefWidth="1462.0" style="-fx-background-color: #f7f1e3; -fx-background-radius: 5;" AnchorPane.bottomAnchor="163.0" AnchorPane.leftAnchor="207.0" AnchorPane.rightAnchor="281.0" AnchorPane.topAnchor="210.0">
             <columns>
                 <TableColumn fx:id="colRegisterDetailID" prefWidth="131.0" text="Register ID" />
                 <TableColumn fx:id="colRegisterDetailNIC" prefWidth="225.0" text="NIC" />
@@ -35,11 +34,5 @@
                 <TableColumn fx:id="colRegisterDetailProgramFee" prefWidth="196.0" text="Fee" />
             </columns>
         </TableView>
-        <Text layoutX="207.0" layoutY="245.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Register ID :">
-            <font>
-                <Font name="System Bold" size="24.0" />
-            </font>
-        </Text>
-        <TextField fx:id="txtSearchRegisterID" layoutX="358.0" layoutY="219.0" prefHeight="39.0" prefWidth="309.0" promptText="Search Here" />
     </children>
 </AnchorPane>

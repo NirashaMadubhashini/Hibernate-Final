@@ -63,4 +63,9 @@ public class RegisterBOImpl implements RegisterBO {
     public boolean find(String value) throws SQLException, ClassNotFoundException {
         return false;
     }
+
+    @Override
+    public String generateNewOrderId() throws SQLException, ClassNotFoundException {
+        return registerDAO.generateNewOrderId();
+    }
 }

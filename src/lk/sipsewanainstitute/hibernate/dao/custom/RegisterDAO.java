@@ -7,4 +7,6 @@ import java.sql.SQLException;
 
 public interface RegisterDAO extends SuperDAO<Register,String> {
     boolean ifRegisterExist(String id) throws SQLException, ClassNotFoundException;
+
+    String generateNewOrderId() throws SQLException, ClassNotFoundException;
 }

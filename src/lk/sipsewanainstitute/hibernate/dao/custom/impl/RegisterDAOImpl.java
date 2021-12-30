@@ -7,6 +7,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import javax.persistence.Query;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -73,5 +74,27 @@ public class RegisterDAOImpl implements RegisterDAO {
     @Override
     public boolean ifRegisterExist(String id) throws SQLException, ClassNotFoundException {
         return false;
+    }
+
+    @Override
+    public String generateNewOrderId() throws SQLException, ClassNotFoundException {
+//        ResultSet rst = CrudUtil.executeQuery("SELECT orderId FROM `Order` ORDER BY orderId DESC LIMIT 1");
+//        if (rst.next()) {
+//
+//            int tempId = Integer.
+//                    parseInt(rst.getString(1).split("-")[1]);
+//            tempId = tempId + 1;
+//            if (tempId <= 9) {
+//                return "O-00" + tempId;
+//            } else if (tempId <= 99) {
+//                return "O-0" + tempId;
+//            } else {
+//                return "O-" + tempId;
+//            }
+//
+//        } else {
+//            return "O-001";
+//        }
+        return null;
     }
 }
