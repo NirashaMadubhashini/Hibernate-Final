@@ -34,80 +34,42 @@ public class updateStudentFormController {
     public String nic;
 
     private final StudentBO studentBO = (StudentBO) getBOFactory().getBO(BOFactory.BoTypes.STUDENT);
-    public void initialize() throws IOException {
-//        refreshStudentUpdate();
-    }
-
 
     public void UpdateStudentOnAction(ActionEvent actionEvent) {
-//        try {
-//            StudentDTO studentDTO = new StudentDTO(nic,txtUpdateName.getText(),txtUpdateBirthDay.getText(),txtUpdateAddress.getText(),
-//                    Integer.parseInt(txtUpdateAge.getText()),txtUpdateGender.getText(),txtUpdateMobile.getText());
-//            boolean updateStudent = studentBO.update(studentDTO);
-//
-//            Stage stage = (Stage) btnUpdateStudent.getScene().getWindow();
-//            stage.close();
-//
-//            refreshStudentUpdate(updateStudent);
-//
-//        } catch (SQLException e) {
-//        } catch (ClassNotFoundException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-
-
-        String name = txtUpdateName.getText();
-        String birthDay = txtUpdateBirthDay.getText();
-        String address =txtUpdateAddress.getText();
-        int age =Integer.parseInt(txtUpdateAge.getText());
-        String gender =txtUpdateGender.getText();
-        String mobile =txtUpdateMobile.getText();
-
         try {
-            if(studentBO.update(new StudentDTO(
+            if (studentBO.update(new StudentDTO(
                     nic,
-                    name,
-                    birthDay,
-                    address,
-                    age,
-                    gender,
-                    mobile
-            ))){
-                studentBO.findAll();
-                txtUpdateName.setText(null);
-                txtUpdateBirthDay.setText(null);
-                txtUpdateAddress.setText(null);
-                txtUpdateAge.setText(null);
-                txtUpdateGender.setText(null);
-                txtUpdateMobile.setText(null);
-
-
+                    txtUpdateName.getText(),
+                    txtUpdateBirthDay.getText(),
+                    txtUpdateAddress.getText(),
+                    Integer.parseInt(txtUpdateAge.getText()),
+                    txtUpdateGender.getText(),
+                    txtUpdateMobile.getText()
+            ))) {
+                new Alert(Alert.AlertType.CONFIRMATION, "Updated").showAndWait();
                 Stage stage = (Stage) btnUpdateStudent.getScene().getWindow();
                 stage.close();
 
-
-            }else {
-                new Alert(Alert.AlertType.CONFIRMATION, "Successfully Updated...").show();
                 refreshStudentUpdate();
+            } else {
+                new Alert(Alert.AlertType.ERROR, "Something Happened").show();
             }
         } catch (Exception e) {
-            new Alert(Alert.AlertType.ERROR, "Something Happened").show();
+            new Alert(Alert.AlertType.WARNING, e.getMessage());
+            e.printStackTrace();
         }
     }
+
     private void refreshStudentUpdate() throws IOException {
         ButtonType yes = new ButtonType("Yes", ButtonBar.ButtonData.YES);
         ButtonType no = new ButtonType("No", ButtonBar.ButtonData.NO);
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Updated..", yes, no);
         Optional<ButtonType> result = alert.showAndWait();
+
             if (result.orElse(no) == yes) {
                 Stage window = (Stage) studentFormContext.getScene().getWindow();
                 window.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/studentForm.fxml"))));
-            }
-      {
+            }{
             new Alert(Alert.AlertType.ERROR, "Failed to update the Item ", ButtonType.CLOSE).show();
         }
     }

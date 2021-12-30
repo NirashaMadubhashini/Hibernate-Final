@@ -3,7 +3,6 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -23,7 +22,7 @@
             </image>
         </ImageView>
         <JFXButton layoutX="65.0" layoutY="41.0" onAction="#backToStudentDetailDashBoardOnAction" prefHeight="52.0" prefWidth="62.0" textFill="TRANSPARENT" />
-        <TableView fx:id="tblStudentDetail" layoutX="173.0" layoutY="211.0" prefHeight="536.0" prefWidth="1511.0" style="-fx-background-color: #f7f1e3; -fx-background-radius: 5;" AnchorPane.bottomAnchor="253.0" AnchorPane.leftAnchor="173.0" AnchorPane.rightAnchor="266.0" AnchorPane.topAnchor="279.0">
+        <TableView fx:id="tblStudentDetail" layoutX="173.0" layoutY="210.0" prefHeight="631.0" prefWidth="1511.0" style="-fx-background-color: #f7f1e3; -fx-background-radius: 5;" AnchorPane.bottomAnchor="163.0" AnchorPane.leftAnchor="173.0" AnchorPane.rightAnchor="266.0" AnchorPane.topAnchor="210.0">
             <columns>
                 <TableColumn fx:id="colStudentDetailName" prefWidth="219.0" text="Name" />
                 <TableColumn fx:id="colStudentDetailNIC" prefWidth="175.0" text="NIC" />
@@ -36,11 +35,5 @@
                 <TableColumn fx:id="colStudentDetailTime" prefWidth="168.0" text="Time" />
             </columns>
         </TableView>
-      <Text layoutX="173.0" layoutY="243.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Student NIC :">
-         <font>
-            <Font name="System Bold" size="24.0" />
-         </font>
-      </Text>
-      <TextField fx:id="txtSearchStudentNIC" layoutX="339.0" layoutY="217.0" prefHeight="39.0" prefWidth="309.0" promptText="Search Here" />
     </children>
 </AnchorPane>
