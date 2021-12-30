@@ -1,8 +1,11 @@
 package lk.sipsewanainstitute.hibernate.controller;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -11,7 +14,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import lk.sipsewanainstitute.hibernate.business.BOFactory;
 import lk.sipsewanainstitute.hibernate.business.custom.StudentBO;
+import lk.sipsewanainstitute.hibernate.business.custom.impl.StudentBOImpl;
+import lk.sipsewanainstitute.hibernate.dao.custom.impl.StudentDAOImpl;
 import lk.sipsewanainstitute.hibernate.dto.StudentDTO;
+import lk.sipsewanainstitute.hibernate.entity.Student;
 import lk.sipsewanainstitute.hibernate.view.tm.StudentDetailTM;
 
 import java.io.IOException;
@@ -35,6 +41,8 @@ public class allStudentFormController {
     public TableColumn colStudentDetailTime;
     public TextField txtSearchStudentNIC;
 
+    static ArrayList<Student> studentList= new ArrayList();
+
     public void initialize() {
         colStudentDetailName.setCellValueFactory(new PropertyValueFactory<>("name"));
         colStudentDetailNIC.setCellValueFactory(new PropertyValueFactory<>("nic"));
@@ -48,8 +56,22 @@ public class allStudentFormController {
 
         loadAllStudentDetails();
 
+        txtSearchStudentNIC.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                try {
+                    search(newValue);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+        });
+
     }
 
+    private void search(String value) throws Exception {
+    }
     private void loadAllStudentDetails() {
         tblStudentDetail.getItems().clear();
         try {

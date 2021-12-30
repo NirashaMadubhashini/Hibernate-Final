@@ -20,5 +20,5 @@ public interface StudentBO  extends SuperBO {
 
     boolean delete(String id) throws Exception;
 
-    boolean find(String value) throws SQLException, ClassNotFoundException;
+    boolean find(String value) throws Exception;
 }

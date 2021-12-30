@@ -35,6 +35,7 @@ public class StudentDAOImpl implements StudentDAO {
 
         transaction.commit();
         return true;
+
     }
 
     @Override
@@ -53,7 +54,7 @@ public class StudentDAOImpl implements StudentDAO {
 
 
     @Override
-    public Student find(String s) throws Exception {
+    public Student find(String id) throws Exception {
         return null;
     }
 

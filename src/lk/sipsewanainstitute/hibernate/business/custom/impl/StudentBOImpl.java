@@ -74,7 +74,7 @@ public class StudentBOImpl implements StudentBO {
     }
 
     @Override
-    public boolean find(String value) throws SQLException, ClassNotFoundException {
+    public boolean find(String id) throws Exception {
         return false;
     }
 
