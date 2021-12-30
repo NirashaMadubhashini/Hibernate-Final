@@ -215,6 +215,8 @@ public class programFormController {
         controller.txtUpdateDuration.setText(table.getDuration());
         controller.txtUpdateFee.setText(String.valueOf(table.getFee()));
         controller.programId=table.getProgramID();
+        controller.date=table.getDate();
+        controller.time=table.getTime();
         Stage stage=new Stage();
         stage.setScene(new Scene(parent));
         stage.show();
