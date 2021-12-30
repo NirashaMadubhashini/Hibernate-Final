@@ -55,7 +55,18 @@ public class StudentDAOImpl implements StudentDAO {
 
     @Override
     public Student find(String id) throws Exception {
-        return null;
+        Session session=FactoryConfiguration.getInstance().getSession();
+        Transaction transaction=session.beginTransaction();
+
+        List<Student> list = null;
+
+        String hql = "FROM Student S WHERE S.nic = :id";
+        Query query = session.createQuery(hql);
+        list = query.getResultList();
+        transaction.commit();
+
+        session.close();
+        return list.get(0);
     }
 
     @Override

@@ -58,8 +58,8 @@ public class StudentBOImpl implements StudentBO {
                 studentDTO.getBirthDay(),
                 studentDTO.getAddress(),
                 studentDTO.getAge(),
-                studentDTO.getMobileNumber(),
-                studentDTO.getGender()
+                studentDTO.getGender(),
+                studentDTO.getMobileNumber()
         ));
     }
 
@@ -74,8 +74,9 @@ public class StudentBOImpl implements StudentBO {
     }
 
     @Override
-    public boolean find(String id) throws Exception {
-        return false;
+    public StudentDTO find(String id) throws Exception {
+        Student student= studentDAO.find(id);
+        return new StudentDTO(student.getNic(), student.getName(), student.getBirthDay(),
+                student.getAddress(), student.getAge(), student.getGender(),student.getMobileNumber());
     }
-
 }

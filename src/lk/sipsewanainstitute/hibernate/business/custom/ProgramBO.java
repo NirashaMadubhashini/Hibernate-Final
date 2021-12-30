@@ -19,6 +19,6 @@ public interface ProgramBO extends SuperBO {
 
     boolean delete(String id) throws Exception;
 
-    boolean find(String value) throws SQLException, ClassNotFoundException;
+    ProgramDTO find(String value) throws Exception;
 
 }

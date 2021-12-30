@@ -5,7 +5,9 @@ import lk.sipsewanainstitute.hibernate.business.custom.ProgramBO;
 import lk.sipsewanainstitute.hibernate.dao.DAOFactory;
 import lk.sipsewanainstitute.hibernate.dao.custom.ProgramDAO;
 import lk.sipsewanainstitute.hibernate.dto.ProgramDTO;
+import lk.sipsewanainstitute.hibernate.dto.StudentDTO;
 import lk.sipsewanainstitute.hibernate.entity.Program;
+import lk.sipsewanainstitute.hibernate.entity.Student;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -68,7 +70,9 @@ public class ProgramBOImpl implements ProgramBO {
     }
 
     @Override
-    public boolean find(String value) throws SQLException, ClassNotFoundException {
-        return false;
+    public ProgramDTO find(String id) throws Exception {
+        Program program= programDAO.find(id);
+        return new ProgramDTO(program.getProgramID(), program.getProgramName(),program.getDuration(),
+                program.getFee());
     }
 }

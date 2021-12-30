@@ -8,12 +8,12 @@ public class RegisterTM {
     private String gender;
     private String programID;
     private String programName;
-    private String fee;
+    private double fee;
 
     public RegisterTM() {
     }
 
-    public RegisterTM(String registerID, String nic, String name, int age, String gender, String programID, String programName, String fee) {
+    public RegisterTM(String registerID, String nic, String name, int age, String gender, String programID, String programName, double fee) {
         this.registerID = registerID;
         this.nic = nic;
         this.name = name;
@@ -80,11 +80,11 @@ public class RegisterTM {
         this.programName = programName;
     }
 
-    public String getFee() {
+    public double getFee() {
         return fee;
     }
 
-    public void setFee(String fee) {
+    public void setFee(double fee) {
         this.fee = fee;
     }
 
@@ -98,7 +98,7 @@ public class RegisterTM {
                 ", gender='" + gender + '\'' +
                 ", programID='" + programID + '\'' +
                 ", programName='" + programName + '\'' +
-                ", fee='" + fee + '\'' +
+                ", fee=" + fee +
                 '}';
     }
 }

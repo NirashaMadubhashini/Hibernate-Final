@@ -51,8 +51,19 @@ public class ProgramDAOImpl implements ProgramDAO {
     }
 
     @Override
-    public Program find(String s) throws Exception {
-        return null;
+    public Program find(String id) throws Exception {
+        Session session=FactoryConfiguration.getInstance().getSession();
+        Transaction transaction=session.beginTransaction();
+
+        List<Program>list=null;
+
+        String hql="FROM Program P WHERE P.programID=:id";
+        Query query=session.createQuery(hql);
+        list = query.getResultList();
+        transaction.commit();
+
+        session.close();
+        return list.get(0);
     }
 
     @Override

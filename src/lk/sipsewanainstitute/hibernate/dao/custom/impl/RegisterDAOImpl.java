@@ -51,8 +51,19 @@ public class RegisterDAOImpl implements RegisterDAO {
     }
 
     @Override
-    public Register find(String s) throws Exception {
-        return null;
+    public Register find(String id) throws Exception {
+        Session session=FactoryConfiguration.getInstance().getSession();
+        Transaction transaction=session.beginTransaction();
+
+        List<Register>list=null;
+
+        String hql="FROM Register R WHERE R.registerID=:id";
+        Query query=session.createQuery(hql);
+        list=query.getResultList();
+        transaction.commit();
+
+        session.close();
+        return list.get(0);
     }
 
     @Override

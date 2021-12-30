@@ -21,6 +21,17 @@ public class RegisterDTO {
     public RegisterDTO(String registerID, String orderDate, String orderTime, Student student) {
     }
 
+//    public RegisterDTO(String registerID, String orderDate, String orderTime) {
+//        this.registerID = registerID;
+//        this.orderDate = orderDate;
+//        this.orderTime = orderTime;
+//    }
+
+    public RegisterDTO(String registerID, String nic) {
+        this.registerID = registerID;
+        this.nic = nic;
+    }
+
     public String getRegisterID() {
         return registerID;
     }

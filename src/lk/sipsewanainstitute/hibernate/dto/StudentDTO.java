@@ -1,5 +1,7 @@
 package lk.sipsewanainstitute.hibernate.dto;
 
+import lk.sipsewanainstitute.hibernate.entity.Student;
+
 public class StudentDTO {
     private String nic;
     private String name;
