@@ -10,12 +10,15 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import lk.sipsewanainstitute.hibernate.business.BOFactory;
 import lk.sipsewanainstitute.hibernate.business.custom.ProgramBO;
 import lk.sipsewanainstitute.hibernate.dto.ProgramDTO;
+import lk.sipsewanainstitute.hibernate.validation.ValidationUtil;
 import lk.sipsewanainstitute.hibernate.view.tm.ProgramTM;
 
 
@@ -24,8 +27,10 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Optional;
+import java.util.regex.Pattern;
 
 import static lk.sipsewanainstitute.hibernate.business.BOFactory.getBOFactory;
 
@@ -50,6 +55,12 @@ public class programFormController {
 
     private final ProgramBO programBO = (ProgramBO) getBOFactory().getBO(BOFactory.BoTypes.PROGRAM);
 
+    LinkedHashMap<TextField, Pattern> map = new LinkedHashMap();
+    Pattern idPattern = Pattern.compile("^(P)[0-9]{3,4}$");
+    Pattern namePattern = Pattern.compile("^[A-z ]{0,}$");
+    Pattern durationPattern = Pattern.compile("^[0-9 A-z ]{2,}$");
+    Pattern feePattern = Pattern.compile("^[0-9]?$");
+
 
     public void initialize() throws IOException, SQLException, ClassNotFoundException {
         colProgramID.setCellValueFactory(new PropertyValueFactory<>("programID"));
@@ -64,8 +75,16 @@ public class programFormController {
         loadDateAndTime();
         tableListener();
         loadAllPrograms();
+        storeValidation();
 
         updateProgramFormController.programFormContext=programFormContext;
+    }
+
+    private void storeValidation() {
+        map.put(txtProgramID, idPattern);
+        map.put(txtProgramName, namePattern);
+        map.put(txtProgramDuration, durationPattern);
+        map.put(txtProgramFee, feePattern);
     }
 
     private void tableListener() {
@@ -225,5 +244,17 @@ public class programFormController {
     public void backToProgramDashBoardOnAction(ActionEvent actionEvent) throws IOException {
         Stage window = (Stage) programFormContext.getScene().getWindow();
         window.setScene(new Scene(FXMLLoader.load(getClass().getResource("/lk/sipsewanainstitute/hibernate/view/dashBoardForm.fxml"))));
+    }
+
+    public void textFieldsKeyReleased(KeyEvent keyEvent) {
+        Object response = ValidationUtil.validate(map, btnAddProgram);
+        if (keyEvent.getCode() == KeyCode.ENTER) {
+            if (response instanceof TextField) {
+                TextField errorText = (TextField) response;
+                errorText.requestFocus();
+            } else if (response instanceof Boolean) {
+                new Alert(Alert.AlertType.WARNING, "Empty Result Set").showAndWait();
+            }
+        }
     }
 }
