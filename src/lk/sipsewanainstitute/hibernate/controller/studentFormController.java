@@ -10,12 +10,15 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import lk.sipsewanainstitute.hibernate.business.BOFactory;
 import lk.sipsewanainstitute.hibernate.business.custom.StudentBO;
 import lk.sipsewanainstitute.hibernate.dto.StudentDTO;
+import lk.sipsewanainstitute.hibernate.validation.ValidationUtil;
 import lk.sipsewanainstitute.hibernate.view.tm.StudentTM;
 
 import java.io.IOException;
@@ -23,8 +26,10 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Optional;
+import java.util.regex.Pattern;
 
 import static lk.sipsewanainstitute.hibernate.business.BOFactory.getBOFactory;
 
@@ -55,6 +60,14 @@ public class studentFormController {
 
     private final StudentBO studentBO = (StudentBO) getBOFactory().getBO(BOFactory.BoTypes.STUDENT);
 
+    LinkedHashMap<TextField, Pattern> map = new LinkedHashMap();
+    Pattern namePattern = Pattern.compile("^[A-z ]{2,}$");
+    Pattern nicPattern = Pattern.compile("^[0-9 A-z]{0,}$");
+    Pattern birthdayPattern = Pattern.compile("^[0-9].{3,}?$");
+    Pattern addressPattern = Pattern.compile("^[A-z ]{3,30}([0-9]{1,2})?$");
+    Pattern agePattern = Pattern.compile("^[0-9 ]{2,}$");
+    Pattern mobilePattern = Pattern.compile("^[0-9]{0,}$");
+
 
     public void initialize() throws Exception {
 
@@ -70,7 +83,7 @@ public class studentFormController {
         colUpdate.setCellValueFactory(new PropertyValueFactory<>("update"));
         colDelete.setCellValueFactory(new PropertyValueFactory<>("delete"));
 
-
+        storeValidations();
         loadDateAndTime();
         tableListener();
         loadAllStudent();
@@ -80,6 +93,14 @@ public class studentFormController {
         updateStudentFormController.studentFormContext =studentFormContext;
     }
 
+    private void storeValidations() {
+        map.put(txtName, namePattern);
+        map.put(txtNIC, nicPattern);
+        map.put(txtBirth, birthdayPattern);
+        map.put(txtAddress, addressPattern);
+        map.put(txtAge, agePattern);
+        map.put(txtMobile, mobilePattern);
+    }
     private void tableListener() {
         tblStudent.getSelectionModel().selectedItemProperty().
                 addListener((observable, oldValue, newValue) -> {
@@ -233,9 +254,11 @@ public class studentFormController {
         controller.txtUpdateBirthDay.setText(table.getBirthDay());
         controller.txtUpdateAddress.setText(table.getAddress());
         controller.txtUpdateAge.setText(String.valueOf(table.getAge()));
-        controller.txtUpdateGender.setText(table.getGender());
         controller.txtUpdateMobile.setText(table.getMobileNumber());
+        controller.txtUpdateGender.setText(table.getGender());
         controller.nic=table.getNic();
+        controller.date=table.getDate();
+        controller.time=table.getTime();
         Stage stage = new Stage();
         stage.setScene(new Scene(parent));
         stage.show();
@@ -243,5 +266,18 @@ public class studentFormController {
     public void backToStudentDashBoardOnAction(ActionEvent actionEvent) throws IOException {
         Stage window = (Stage) studentFormContext.getScene().getWindow();
         window.setScene(new Scene(FXMLLoader.load(getClass().getResource("/lk/sipsewanainstitute/hibernate/view/dashBoardForm.fxml"))));
+    }
+
+
+    public void textFieldKeyReleased(KeyEvent keyEvent) {
+        Object response = ValidationUtil.validate(map, btnAddStudent);
+        if (keyEvent.getCode() == KeyCode.ENTER) {
+            if (response instanceof TextField) {
+                TextField errorText = (TextField) response;
+                errorText.requestFocus();
+            } else if (response instanceof Boolean) {
+                new Alert(Alert.AlertType.WARNING, "Empty Result Set").showAndWait();
+            }
+        }
     }
 }

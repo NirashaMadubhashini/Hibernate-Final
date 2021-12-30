@@ -54,12 +54,15 @@ public class StudentBOImpl implements StudentBO {
     @Override
     public boolean update(StudentDTO studentDTO) throws Exception {
         return studentDAO.update(new Student(
+                studentDTO.getNic(),
                 studentDTO.getName(),
                 studentDTO.getBirthDay(),
                 studentDTO.getAddress(),
                 studentDTO.getAge(),
+                studentDTO.getMobileNumber(),
                 studentDTO.getGender(),
-                studentDTO.getMobileNumber()
+                studentDTO.getDate(),
+                studentDTO.getTime()
         ));
     }
 

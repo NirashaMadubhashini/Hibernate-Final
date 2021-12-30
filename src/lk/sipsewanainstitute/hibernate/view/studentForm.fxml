@@ -21,7 +21,7 @@
                 <Blend />
             </effect>
             <children>
-                <TextField fx:id="txtName" layoutX="231.0" layoutY="90.0" prefHeight="35.0" prefWidth="300.0">
+                <TextField fx:id="txtNIC" layoutX="641.0" layoutY="91.0" onKeyReleased="#textFieldKeyReleased" prefHeight="35.0" prefWidth="300.0">
                     <cursor>
                         <Cursor fx:constant="HAND" />
                     </cursor>
@@ -43,7 +43,7 @@
                         <Font name="System Bold" size="20.0" />
                     </font>
                 </Text>
-                <TextField fx:id="txtAddress" layoutX="231.0" layoutY="139.0" prefHeight="35.0" prefWidth="300.0">
+                <TextField fx:id="txtName" layoutX="231.0" layoutY="91.0" onKeyReleased="#textFieldKeyReleased" prefHeight="35.0" prefWidth="300.0">
                     <cursor>
                         <Cursor fx:constant="HAND" />
                     </cursor>
@@ -53,12 +53,7 @@
                         <Font name="System Bold" size="20.0" />
                     </font>
                 </Text>
-                <TextField fx:id="txtMobile" layoutX="1150.0" layoutY="136.0" prefHeight="35.0" prefWidth="300.0">
-                    <cursor>
-                        <Cursor fx:constant="HAND" />
-                    </cursor>
-                </TextField>
-                <TextField fx:id="txtNIC" layoutX="641.0" layoutY="91.0" prefHeight="35.0" prefWidth="300.0">
+                <TextField fx:id="txtMobile" layoutX="1150.0" layoutY="136.0" onKeyReleased="#textFieldKeyReleased" prefHeight="35.0" prefWidth="300.0">
                     <cursor>
                         <Cursor fx:constant="HAND" />
                     </cursor>
@@ -68,7 +63,7 @@
                         <Font name="System Bold" size="20.0" />
                     </font>
                 </Text>
-                <TextField fx:id="txtAge" layoutX="641.0" layoutY="139.0" prefHeight="35.0" prefWidth="100.0">
+                <TextField fx:id="txtAge" layoutX="641.0" layoutY="139.0" onKeyReleased="#textFieldKeyReleased" prefHeight="35.0" prefWidth="100.0">
                     <cursor>
                         <Cursor fx:constant="HAND" />
                     </cursor>
@@ -83,6 +78,11 @@
                         <Font name="System Bold" size="20.0" />
                     </font>
                 </Text>
+                <TextField fx:id="txtBirth" layoutX="1150.0" layoutY="88.0" onKeyReleased="#textFieldKeyReleased" prefHeight="35.0" prefWidth="300.0" promptText="                   DD / MM / YYYY">
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </TextField>
                 <Text layoutX="1032.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date f Birth">
                     <font>
                         <Font name="System Bold" size="20.0" />
@@ -96,6 +96,11 @@
                         <Cursor fx:constant="HAND" />
                     </cursor>
                 </JFXButton>
+                <TextField fx:id="txtAddress" layoutX="231.0" layoutY="139.0" onKeyReleased="#textFieldKeyReleased" prefHeight="35.0" prefWidth="300.0">
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </TextField>
                 <Text layoutX="142.0" layoutY="161.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Address">
                     <font>
                         <Font name="System Bold" size="20.0" />
@@ -117,11 +122,6 @@
                     </columns>
                 </TableView>
                 <ComboBox fx:id="cmdGender" layoutX="231.0" layoutY="194.0" prefHeight="35.0" prefWidth="300.0" />
-                <TextField fx:id="txtBirth" layoutX="1150.0" layoutY="88.0" prefHeight="35.0" prefWidth="300.0" promptText="                   DD / MM / YYYY">
-                    <cursor>
-                        <Cursor fx:constant="HAND" />
-                    </cursor>
-                </TextField>
             </children>
         </Pane>
         <ImageView fitHeight="52.0" fitWidth="84.0" layoutX="64.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true">

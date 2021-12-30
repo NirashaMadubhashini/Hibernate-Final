@@ -62,6 +62,7 @@ public class Student implements SuperEntity{
         this.gender = gender;
     }
 
+
     public String getNic() {
         return nic;
     }

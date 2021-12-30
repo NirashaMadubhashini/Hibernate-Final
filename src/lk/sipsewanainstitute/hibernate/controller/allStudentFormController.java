@@ -39,7 +39,6 @@ public class allStudentFormController {
     public TableColumn colStudentDetailGender;
     public TableColumn colStudentDetailDate;
     public TableColumn colStudentDetailTime;
-    public TextField txtSearchStudentNIC;
 
     static ArrayList<Student> studentList= new ArrayList();
 
@@ -56,21 +55,6 @@ public class allStudentFormController {
 
         loadAllStudentDetails();
 
-        txtSearchStudentNIC.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                try {
-                    search(newValue);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-
-        });
-
-    }
-
-    private void search(String value) throws Exception {
     }
     private void loadAllStudentDetails() {
         tblStudentDetail.getItems().clear();

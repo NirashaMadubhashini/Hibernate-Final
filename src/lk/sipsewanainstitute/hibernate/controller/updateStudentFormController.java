@@ -32,6 +32,8 @@ public class updateStudentFormController {
     public TextField txtUpdateGender;
     public JFXButton btnUpdateStudent;
     public String nic;
+    public String date;
+    public String time;
 
     private final StudentBO studentBO = (StudentBO) getBOFactory().getBO(BOFactory.BoTypes.STUDENT);
 
@@ -44,7 +46,9 @@ public class updateStudentFormController {
                     txtUpdateAddress.getText(),
                     Integer.parseInt(txtUpdateAge.getText()),
                     txtUpdateGender.getText(),
-                    txtUpdateMobile.getText()
+                    txtUpdateMobile.getText(),
+                    date,
+                    time
             ))) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Updated").showAndWait();
                 Stage stage = (Stage) btnUpdateStudent.getScene().getWindow();
@@ -55,7 +59,6 @@ public class updateStudentFormController {
                 new Alert(Alert.AlertType.ERROR, "Something Happened").show();
             }
         } catch (Exception e) {
-            new Alert(Alert.AlertType.WARNING, e.getMessage());
             e.printStackTrace();
         }
     }
@@ -69,23 +72,6 @@ public class updateStudentFormController {
             if (result.orElse(no) == yes) {
                 Stage window = (Stage) studentFormContext.getScene().getWindow();
                 window.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/studentForm.fxml"))));
-            }{
-            new Alert(Alert.AlertType.ERROR, "Failed to update the Item ", ButtonType.CLOSE).show();
-        }
+            }
     }
-
-//    private void refreshStudentUpdate(boolean updateStudent) throws IOException {
-//        ButtonType yes = new ButtonType("Yes", ButtonBar.ButtonData.YES);
-//        ButtonType no = new ButtonType("No", ButtonBar.ButtonData.NO);
-//        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Updated..", yes, no);
-//        Optional<ButtonType> result = alert.showAndWait();
-//        if (updateStudent) {
-//            if (result.orElse(no) == yes) {
-//                Stage window = (Stage) studentFormContext.getScene().getWindow();
-//                window.setScene(new Scene(FXMLLoader.load(getClass().getResource("../view/studentForm.fxml"))));
-//            }
-//        } else {
-//            new Alert(Alert.AlertType.ERROR, "Failed to update the Item ", ButtonType.CLOSE).show();
-//        }
-//    }
 }
