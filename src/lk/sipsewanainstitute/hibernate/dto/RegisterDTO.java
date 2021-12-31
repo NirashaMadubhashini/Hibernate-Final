@@ -32,6 +32,9 @@ public class RegisterDTO {
         this.nic = nic;
     }
 
+    public RegisterDTO(String registerID, String studentNic, String name, String birthDay, int age, String gender, String mobile, String programId, String programName, String duration, double fee) {
+    }
+
     public String getRegisterID() {
         return registerID;
     }

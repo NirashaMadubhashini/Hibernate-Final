@@ -83,7 +83,7 @@ public class RegisterBOImpl implements RegisterBO {
     public ProgramDTO findProgram(String id) throws Exception {
         Program program= programDAO.find(id);
         return new ProgramDTO(program.getProgramID(), program.getProgramName(),program.getDuration(),
-                program.getFee(),program.getDate(),program.getTime());
+                program.getFee());
     }
 
     @Override

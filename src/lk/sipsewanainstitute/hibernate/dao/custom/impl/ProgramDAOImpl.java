@@ -58,7 +58,7 @@ public class ProgramDAOImpl implements ProgramDAO {
         List<Program>list=null;
 
         String hql="FROM Program P WHERE P.programID=:id";
-        Query query=session.createQuery(hql);
+        Query query=session.createQuery(hql).setString("id",id);
         list = query.getResultList();
         transaction.commit();
 

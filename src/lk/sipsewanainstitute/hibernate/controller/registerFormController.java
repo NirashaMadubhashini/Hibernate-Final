@@ -19,9 +19,6 @@ import lk.sipsewanainstitute.hibernate.business.custom.impl.RegisterBOImpl;
 import lk.sipsewanainstitute.hibernate.dto.ProgramDTO;
 import lk.sipsewanainstitute.hibernate.dto.RegisterDTO;
 import lk.sipsewanainstitute.hibernate.dto.StudentDTO;
-import lk.sipsewanainstitute.hibernate.entity.Register;
-import lk.sipsewanainstitute.hibernate.entity.Student;
-import lk.sipsewanainstitute.hibernate.entity.Student_Program;
 import lk.sipsewanainstitute.hibernate.view.tm.RegisterTM;
 
 import java.io.IOException;
@@ -30,7 +27,6 @@ import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.stream.Collectors;
 
 public class registerFormController {
@@ -136,7 +132,7 @@ public class registerFormController {
                 cmdRegisterProgramID.getItems().add(dto.getProgramID());
             }
         } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+            new Alert(Alert.AlertType.ERROR, "Failed to load customer ids").show();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (Exception e) {
@@ -253,24 +249,34 @@ public class registerFormController {
     }
 
     public void makeRegisterOnAction(ActionEvent actionEvent) {
-        //        boolean b = saveOrder(txtRegisterStudentID.getText(), String.valueOf(cmdRegisterNIC.getValue()), txtRegisterFullName.getText(), txtRegisterBirthDay.getText(),
-//                txtRegisterAddress.getText(), Integer.parseInt(txtRegisterAge.getText()), txtRegisterGender.getText(), txtRegisterMobile.getText(),
-//                String.valueOf(cmdRegisterProgramID.getValue()), txtRegisterProgramName.getText(), txtRegisterProgramDuration.getText(), Double.parseDouble(txtRegisterProgramFee.getText()),
-////                tblRegistration.getItems().stream().map(tm ->
-////                        new RegisterDTO(tm.getRegisterID(), tm.getNic(), tm.getProgramID()).collect(Collectors.toList()));
-//
-//
-//        if (b) {
-//            new Alert(Alert.AlertType.INFORMATION, "Order has been placed successfully").show();
-//        } else {
-//            new Alert(Alert.AlertType.ERROR, "Order has not been placed successfully").show();
-//        }
+        boolean b = saveOrder(txtRegisterStudentID.getText(), String.valueOf(cmdRegisterNIC.getValue()),txtRegisterFullName.getText(),txtRegisterBirthDay.getText(),
+               Integer.parseInt(txtRegisterAge.getText()),txtRegisterGender.getText(),txtRegisterMobile.getText(),
+                String.valueOf(cmdRegisterProgramID.getValue()),txtRegisterProgramName.getText(),txtRegisterProgramDuration.getText(),Double.parseDouble(txtRegisterProgramFee.getText()));
+
+        if (b) {
+            new Alert(Alert.AlertType.INFORMATION, "Order has been placed successfully").show();
+        } else {
+            new Alert(Alert.AlertType.ERROR, "Order has not been placed successfully").show();
+        }
 
         registerID = generateOrderId();
         txtRegisterStudentID.setText(generateOrderId());
         tblRegistration.getItems().clear();
         clearText();
         calculateCost();
+    }
+
+    public boolean saveOrder(String registerID,String studentNic,String name,String birthDay,int age,String gender,String mobile,String programId,String programName,String duration,double fee){
+    try {
+        RegisterDTO registerDTO = new RegisterDTO(registerID, studentNic, name, birthDay, age,gender,mobile,programId,programName,duration,fee);
+        return registerBOImpl.purchaseOrder(registerDTO);
+
+    } catch (SQLException throwables) {
+        throwables.printStackTrace();
+    } catch (ClassNotFoundException e) {
+        e.printStackTrace();
+    }
+        return false;
     }
 
     private void calculateCost() {
@@ -310,10 +316,6 @@ public class registerFormController {
         for (int i = 0; i < tblRegistration.getItems().size(); i++) {
             tblRegistration.getItems().clear();
         }
-    }
-
-    public boolean saveOrder() {
-        return false;
     }
 
     public void backToRegisterDashBoardOnAction(ActionEvent actionEvent) throws IOException {

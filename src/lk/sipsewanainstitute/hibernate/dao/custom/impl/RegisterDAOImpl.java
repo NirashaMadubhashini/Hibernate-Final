@@ -58,7 +58,7 @@ public class RegisterDAOImpl implements RegisterDAO {
         List<Register>list=null;
 
         String hql="FROM Register R WHERE R.registerID=:id";
-        Query query=session.createQuery(hql);
+        Query query=session.createQuery(hql).setString("id",id);
         list=query.getResultList();
         transaction.commit();
 

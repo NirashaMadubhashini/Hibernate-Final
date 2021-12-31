@@ -61,7 +61,7 @@ public class StudentDAOImpl implements StudentDAO {
         List<Student> list = null;
 
         String hql = "FROM Student S WHERE S.nic = :id";
-        Query query = session.createQuery(hql);
+        Query query = session.createQuery(hql).setString("id",id);
         list = query.getResultList();
         transaction.commit();
 
