@@ -36,7 +36,7 @@ public class RegisterBOImpl implements RegisterBO {
                 return false;
             }
 
-            Register register = new Register(dto.getRegisterID(), dto.getNic(), dto.getOrderDate(),dto.getOrderTime());
+            Register register = new Register(dto.getRegisterID(),dto.getNic(), dto.getOrderDate(),dto.getOrderTime());
             boolean registerAdded = registerDAO.add(register);
             if (!registerAdded) {
 
