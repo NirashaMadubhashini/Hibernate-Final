@@ -299,8 +299,6 @@ public class registerFormController {
         txtRegisterProgramName.setText("");
         txtRegisterProgramDuration.setText("");
         txtRegisterProgramFee.setText("");
-//        cmdRegisterNIC.setValue("");
-//        cmdRegisterProgramID.setValue("");
         lblTotalPayment.setText("");
 
         for (int i = 0; i < tblRegistration.getItems().size(); i++) {
