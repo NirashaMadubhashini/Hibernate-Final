@@ -22,8 +22,9 @@ import java.util.List;
 
 public class RegisterBOImpl implements RegisterBO {
     private final RegisterDAO registerDAO = (RegisterDAO) DAOFactory.getDAOFactory().getDAO(DAOFactory.DAOTypes.REGISTER);
-    private final StudentDAO studentDAO  = (StudentDAO) DAOFactory.getDAOFactory().getDAO(DAOFactory.DAOTypes.STUDENT);
+    private final StudentDAO studentDAO = (StudentDAO) DAOFactory.getDAOFactory().getDAO(DAOFactory.DAOTypes.STUDENT);
     private final ProgramDAO programDAO = (ProgramDAO) DAOFactory.getDAOFactory().getDAO(DAOFactory.DAOTypes.PROGRAM);
+
 
     @Override
     public boolean purchaseOrder(RegisterDTO dto) throws SQLException, ClassNotFoundException {
@@ -36,7 +37,7 @@ public class RegisterBOImpl implements RegisterBO {
                 return false;
             }
 
-            Register register = new Register(dto.getRegisterID(),dto.getNic(), dto.getOrderDate(),dto.getOrderTime());
+            Register register = new Register(dto.getRegisterID(), dto.getOrderDate(), dto.getOrderTime());
             boolean registerAdded = registerDAO.add(register);
             if (!registerAdded) {
 
@@ -46,55 +47,62 @@ public class RegisterBOImpl implements RegisterBO {
                 return false;
             }
 
-                Student search = studentDAO.find(dto.getRegisterID());
-                boolean update = studentDAO.update(search);
-                if (!update) {
-                    transaction.commit();
+            Student search = studentDAO.find(dto.getRegisterID());
+            boolean update = studentDAO.update(search);
 
-                    session.close();
-                    return false;
-                }
-            } catch (Exception exception) {
-            exception.printStackTrace();
+            if (!update) {
+                transaction.commit();
+
+                session.close();
+                return false;
+            }
+
+            transaction.commit();
+
+            session.close();
+
+            return false;
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return true;
     }
 
-    @Override
-    public List<RegisterDTO> findAll() throws Exception {
-        List<Register> all = registerDAO.findAll();
-        ArrayList<RegisterDTO> dtoList = new ArrayList<>();
+//    @Override
+//    public List<RegisterDTO> findAll() throws Exception {
+//        List<Register> all = registerDAO.findAll();
+//        ArrayList<RegisterDTO> dtoList = new ArrayList<>();
+//
+//        for (Register register : all) {
+//            dtoList.add(new RegisterDTO(
+//                    register.getRegisterID(),
+//                    register.getOrderDate(),
+//                    register.getOrderTime(),
+//                    register.getStudent()
+//            ));
+//        }
+//        return dtoList;
+//    }
 
-        for (Register register : all) {
-            dtoList.add(new RegisterDTO(
-                    register.getRegisterID(),
-                    register.getOrderDate(),
-                    register.getOrderTime(),
-                    register.getStudent()
-            ));
-        }
-        return dtoList;
-    }
+//    @Override
+//    public boolean add(RegisterDTO registerDTO) throws Exception {
+//        return registerDAO.add(new Register(
+//                registerDTO.getRegisterID(),
+//                registerDTO.getOrderDate(),
+//                registerDTO.getOrderTime(),
+//                registerDTO.getNic()
+//        ));
+//    }
 
-    @Override
-    public boolean add(RegisterDTO registerDTO) throws Exception {
-                return registerDAO.add(new Register(
-                registerDTO.getRegisterID(),
-                registerDTO.getOrderDate(),
-                registerDTO.getOrderTime(),
-                registerDTO.getNic()
-        ));
-    }
-
-    @Override
-    public boolean update(RegisterDTO registerDTO) throws Exception {
-                return registerDAO.update(new Register(
-                registerDTO.getRegisterID(),
-                registerDTO.getNic(),
-                registerDTO.getOrderDate(),
-                registerDTO.getOrderTime()
-        ));
-    }
+//    @Override
+//    public boolean update(RegisterDTO registerDTO) throws Exception {
+//        return registerDAO.update(new Register(
+//                registerDTO.getRegisterID(),
+//                registerDTO.getNic(),
+//                registerDTO.getOrderDate(),
+//                registerDTO.getOrderTime()
+//        ));
+//    }
 
     @Override
     public boolean ifRegisterExist(String id) throws SQLException, ClassNotFoundException {
@@ -108,15 +116,15 @@ public class RegisterBOImpl implements RegisterBO {
 
     @Override
     public StudentDTO findStudent(String id) throws Exception {
-        Student student= studentDAO.find(id);
+        Student student = studentDAO.find(id);
         return new StudentDTO(student.getNic(), student.getName(), student.getBirthDay(),
-                student.getAddress(), student.getAge(), student.getGender(),student.getMobileNumber());
+                student.getAddress(), student.getAge(), student.getGender(), student.getMobileNumber());
     }
 
     @Override
     public ProgramDTO findProgram(String id) throws Exception {
-        Program program= programDAO.find(id);
-        return new ProgramDTO(program.getProgramID(), program.getProgramName(),program.getDuration(),
+        Program program = programDAO.find(id);
+        return new ProgramDTO(program.getProgramID(), program.getProgramName(), program.getDuration(),
                 program.getFee());
     }
 
@@ -131,7 +139,7 @@ public class RegisterBOImpl implements RegisterBO {
         List<Student> all = studentDAO.findAll();
         for (Student student : all) {
             allStudents.add(new StudentDTO(student.getNic(), student.getName(), student.getBirthDay(),
-                    student.getAddress(), student.getAge(), student.getGender(),student.getMobileNumber()));
+                    student.getAddress(), student.getAge(), student.getGender(), student.getMobileNumber()));
         }
         return allStudents;
     }
@@ -141,8 +149,8 @@ public class RegisterBOImpl implements RegisterBO {
         ArrayList<ProgramDTO> allPrograms = new ArrayList<>();
         List<Program> all = programDAO.findAll();
         for (Program program : all) {
-           allPrograms.add(new ProgramDTO(program.getProgramID(), program.getProgramName(),program.getDuration(),
-                   program.getFee()));
+            allPrograms.add(new ProgramDTO(program.getProgramID(), program.getProgramName(), program.getDuration(),
+                    program.getFee()));
         }
         return allPrograms;
     }

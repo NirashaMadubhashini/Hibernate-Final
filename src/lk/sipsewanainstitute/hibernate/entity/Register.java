@@ -1,5 +1,6 @@
 package lk.sipsewanainstitute.hibernate.entity;
 
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.Columns;
 
 import javax.persistence.*;
@@ -12,8 +13,6 @@ public class Register implements SuperEntity{
     private String orderTime;
 
     @ManyToOne(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "student_id", referencedColumnName = "nic")
-//    @Column(name = "student_id")
     private Student student;
 
     public Register() {
@@ -29,9 +28,6 @@ public class Register implements SuperEntity{
         this.registerID = registerID;
         this.orderDate = orderDate;
         this.orderTime = orderTime;
-    }
-
-    public Register(String registerID, String orderDate, String orderTime, String nic) {
     }
 
     public String getRegisterID() {
@@ -65,4 +61,5 @@ public class Register implements SuperEntity{
     public void setStudent(Student student) {
         this.student = student;
     }
+
 }

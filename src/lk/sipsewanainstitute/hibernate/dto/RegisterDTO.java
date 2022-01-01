@@ -18,22 +18,6 @@ public class RegisterDTO {
         this.orderTime = orderTime;
     }
 
-    public RegisterDTO(String registerID, String orderDate, String orderTime, Student student) {
-    }
-
-//    public RegisterDTO(String registerID, String orderDate, String orderTime) {
-//        this.registerID = registerID;
-//        this.orderDate = orderDate;
-//        this.orderTime = orderTime;
-//    }
-
-    public RegisterDTO(String registerID, String nic) {
-        this.registerID = registerID;
-        this.nic = nic;
-    }
-
-    public RegisterDTO(String registerID, String studentNic, String name, String birthDay, int age, String gender, String mobile, String programId, String programName, String duration, double fee) {
-    }
 
     public String getRegisterID() {
         return registerID;

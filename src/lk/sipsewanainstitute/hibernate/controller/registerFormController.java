@@ -19,6 +19,7 @@ import lk.sipsewanainstitute.hibernate.business.custom.impl.RegisterBOImpl;
 import lk.sipsewanainstitute.hibernate.dto.ProgramDTO;
 import lk.sipsewanainstitute.hibernate.dto.RegisterDTO;
 import lk.sipsewanainstitute.hibernate.dto.StudentDTO;
+import lk.sipsewanainstitute.hibernate.entity.Register;
 import lk.sipsewanainstitute.hibernate.view.tm.RegisterTM;
 
 import java.io.IOException;
@@ -251,9 +252,10 @@ public class registerFormController {
     public void makeRegisterOnAction(ActionEvent actionEvent) throws Exception {
         RegisterDTO registerDTO = new RegisterDTO(
                 txtRegisterStudentID.getText(),
-                cmdRegisterNIC.getValue(),
+                String.valueOf(cmdRegisterNIC.getValue()),
                 txtRegisterDate.getText(),
                 txtRegisterTime.getText()
+
         );
 
         if (registerBOImpl.purchaseOrder(registerDTO)) {
