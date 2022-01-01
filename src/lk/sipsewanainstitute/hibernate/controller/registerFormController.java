@@ -248,12 +248,15 @@ public class registerFormController {
         }
     }
 
-    public void makeRegisterOnAction(ActionEvent actionEvent) {
-        boolean b = saveOrder(txtRegisterStudentID.getText(), String.valueOf(cmdRegisterNIC.getValue()),txtRegisterFullName.getText(),txtRegisterBirthDay.getText(),
-               Integer.parseInt(txtRegisterAge.getText()),txtRegisterGender.getText(),txtRegisterMobile.getText(),
-                String.valueOf(cmdRegisterProgramID.getValue()),txtRegisterProgramName.getText(),txtRegisterProgramDuration.getText(),Double.parseDouble(txtRegisterProgramFee.getText()));
+    public void makeRegisterOnAction(ActionEvent actionEvent) throws Exception {
+        RegisterDTO registerDTO = new RegisterDTO(
+                txtRegisterStudentID.getText(),
+                cmdRegisterNIC.getValue(),
+                txtRegisterDate.getText(),
+                txtRegisterTime.getText()
+        );
 
-        if (b) {
+        if (registerBOImpl.purchaseOrder(registerDTO)) {
             new Alert(Alert.AlertType.INFORMATION, "Order has been placed successfully").show();
         } else {
             new Alert(Alert.AlertType.ERROR, "Order has not been placed successfully").show();
@@ -264,19 +267,6 @@ public class registerFormController {
         tblRegistration.getItems().clear();
         clearText();
         calculateCost();
-    }
-
-    public boolean saveOrder(String registerID,String studentNic,String name,String birthDay,int age,String gender,String mobile,String programId,String programName,String duration,double fee){
-    try {
-        RegisterDTO registerDTO = new RegisterDTO(registerID, studentNic, name, birthDay, age,gender,mobile,programId,programName,duration,fee);
-        return registerBOImpl.purchaseOrder(registerDTO);
-
-    } catch (SQLException throwables) {
-        throwables.printStackTrace();
-    } catch (ClassNotFoundException e) {
-        e.printStackTrace();
-    }
-        return false;
     }
 
     private void calculateCost() {
@@ -309,8 +299,8 @@ public class registerFormController {
         txtRegisterProgramName.setText("");
         txtRegisterProgramDuration.setText("");
         txtRegisterProgramFee.setText("");
-        cmdRegisterNIC.setValue("");
-        cmdRegisterProgramID.setValue("");
+//        cmdRegisterNIC.setValue("");
+//        cmdRegisterProgramID.setValue("");
         lblTotalPayment.setText("");
 
         for (int i = 0; i < tblRegistration.getItems().size(); i++) {
