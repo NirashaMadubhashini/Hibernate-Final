@@ -11,7 +11,11 @@ import lk.sipsewanainstitute.hibernate.dto.StudentDTO;
 import lk.sipsewanainstitute.hibernate.entity.Program;
 import lk.sipsewanainstitute.hibernate.entity.Register;
 import lk.sipsewanainstitute.hibernate.entity.Student;
+import lk.sipsewanainstitute.hibernate.util.FactoryConfiguration;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +27,37 @@ public class RegisterBOImpl implements RegisterBO {
 
     @Override
     public boolean purchaseOrder(RegisterDTO dto) throws SQLException, ClassNotFoundException {
-        return false;
+        try {
+            Session session = FactoryConfiguration.getInstance().getSession();
+            Transaction transaction = session.beginTransaction();
+
+            boolean registerAvailable = registerDAO.ifRegisterExist(dto.getRegisterID());
+            if (registerAvailable) {
+                return false;
+            }
+
+            Register register = new Register(dto.getRegisterID(), dto.getNic(), dto.getOrderDate(),dto.getOrderTime());
+            boolean registerAdded = registerDAO.add(register);
+            if (!registerAdded) {
+
+                transaction.commit();
+
+                session.close();
+                return false;
+            }
+
+                Student search = studentDAO.find(dto.getRegisterID());
+                boolean update = studentDAO.update(search);
+                if (!update) {
+                    transaction.commit();
+
+                    session.close();
+                    return false;
+                }
+            } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+        return true;
     }
 
     @Override

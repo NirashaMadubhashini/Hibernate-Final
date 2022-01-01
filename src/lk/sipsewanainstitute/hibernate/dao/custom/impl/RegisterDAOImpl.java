@@ -5,6 +5,7 @@ import lk.sipsewanainstitute.hibernate.entity.Register;
 import lk.sipsewanainstitute.hibernate.util.FactoryConfiguration;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.hql.internal.ast.tree.Statement;
 
 import javax.persistence.Query;
 import java.sql.ResultSet;
@@ -52,14 +53,14 @@ public class RegisterDAOImpl implements RegisterDAO {
 
     @Override
     public Register find(String id) throws Exception {
-        Session session=FactoryConfiguration.getInstance().getSession();
-        Transaction transaction=session.beginTransaction();
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
 
-        List<Register>list=null;
+        List<Register> list = null;
 
-        String hql="FROM Register R WHERE R.registerID=:id";
-        Query query=session.createQuery(hql).setString("id",id);
-        list=query.getResultList();
+        String hql = "FROM Register R WHERE R.registerID=:id";
+        Query query = session.createQuery(hql).setString("id", id);
+        list = query.getResultList();
         transaction.commit();
 
         session.close();
@@ -83,29 +84,45 @@ public class RegisterDAOImpl implements RegisterDAO {
     }
 
     @Override
-    public boolean ifRegisterExist(String id) throws SQLException, ClassNotFoundException {
-        return false;
+    public boolean ifRegisterExist(String registerID) throws SQLException, ClassNotFoundException {
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+
+        String hql = "SELECT registerID FROM Register WHERE registerID=registerID";
+        Query query = session.createQuery(hql);
+
+        transaction.commit();
+
+        session.close();
+
+        return true;
     }
 
     @Override
     public String generateNewOrderId() throws SQLException, ClassNotFoundException {
-//        ResultSet rst = CrudUtil.executeQuery("SELECT orderId FROM `Order` ORDER BY orderId DESC LIMIT 1");
-//        if (rst.next()) {
-//
-//            int tempId = Integer.
-//                    parseInt(rst.getString(1).split("-")[1]);
-//            tempId = tempId + 1;
-//            if (tempId <= 9) {
-//                return "O-00" + tempId;
-//            } else if (tempId <= 99) {
-//                return "O-0" + tempId;
-//            } else {
-//                return "O-" + tempId;
-//            }
-//
-//        } else {
-//            return "O-001";
-//        }
-        return null;
+
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+
+
+        String hql = "FROM Register r ORDER BY r.registerID desc";
+        Query query = session.createQuery(hql);
+        List resultList = query.getResultList();
+        transaction.commit();
+        session.close();
+        if (resultList.size() > 0){
+            int tempId = Integer.
+                    parseInt(resultList.get(0).toString().split("-")[1]);
+            tempId = tempId + 1;
+            if (tempId <= 9) {
+                return "O-00" + tempId;
+            } else if (tempId <= 99) {
+                return "O-0" + tempId;
+            } else {
+                return "O-" + tempId;
+            }
+        }else {
+            return "O-001";
+        }
     }
 }
