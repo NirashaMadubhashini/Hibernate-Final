@@ -21,7 +21,7 @@ public class ProgramDTO {
     }
 
     public ProgramDTO(String programId, String programName, String duration, double fee) {
-        this.programID = programID;
+        this.programID = programId;
         this.programName = programName;
         this.duration = duration;
         this.fee = fee;
