@@ -12,7 +12,7 @@ public class Register implements SuperEntity{
     private String orderDate;
     private String orderTime;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     private Student student;
 
     public Register() {
@@ -62,4 +62,13 @@ public class Register implements SuperEntity{
         this.student = student;
     }
 
+    @Override
+    public String toString() {
+        return "Register{" +
+                "registerID='" + registerID + '\'' +
+                ", orderDate='" + orderDate + '\'' +
+                ", orderTime='" + orderTime + '\'' +
+                ", student=" + student +
+                '}';
+    }
 }

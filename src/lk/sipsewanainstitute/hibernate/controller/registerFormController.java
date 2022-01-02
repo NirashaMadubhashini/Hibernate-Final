@@ -16,9 +16,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import lk.sipsewanainstitute.hibernate.business.BOFactory;
 import lk.sipsewanainstitute.hibernate.business.custom.impl.RegisterBOImpl;
-import lk.sipsewanainstitute.hibernate.dto.ProgramDTO;
-import lk.sipsewanainstitute.hibernate.dto.RegisterDTO;
-import lk.sipsewanainstitute.hibernate.dto.StudentDTO;
+import lk.sipsewanainstitute.hibernate.dto.*;
 import lk.sipsewanainstitute.hibernate.entity.Register;
 import lk.sipsewanainstitute.hibernate.view.tm.RegisterTM;
 
@@ -88,7 +86,7 @@ public class registerFormController {
                 txtRegisterMobile.setText(studentDTO.getMobileNumber());
 
             } catch (SQLException e) {
-                new Alert(Alert.AlertType.ERROR, "Failed to find the customer " + newValue + "" + e).show();
+                new Alert(Alert.AlertType.ERROR, "Failed to find the Student " + newValue + "" + e).show();
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             } catch (Exception e) {
@@ -104,7 +102,7 @@ public class registerFormController {
                 txtRegisterProgramDuration.setText(programDTO.getDuration());
                 txtRegisterProgramFee.setText(String.valueOf(programDTO.getFee()));
             } catch (SQLException e) {
-                new Alert(Alert.AlertType.ERROR, "Failed to find the customer " + newValue + "" + e).show();
+                new Alert(Alert.AlertType.ERROR, "Failed to find the Program " + newValue + "" + e).show();
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             } catch (Exception e) {
@@ -133,7 +131,7 @@ public class registerFormController {
                 cmdRegisterProgramID.getItems().add(dto.getProgramID());
             }
         } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR, "Failed to load customer ids").show();
+            new Alert(Alert.AlertType.ERROR, "Failed to load Program ids").show();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (Exception e) {
@@ -148,7 +146,7 @@ public class registerFormController {
                 cmdRegisterNIC.getItems().add(studentDTO.getNic());
             }
         } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR, "Failed to load customer ids").show();
+            new Alert(Alert.AlertType.ERROR, "Failed to load Student nics").show();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (Exception e) {
@@ -160,7 +158,7 @@ public class registerFormController {
         try {
             return registerBOImpl.generateNewOrderId();
         } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR, "Failed to generate a new order id").show();
+            new Alert(Alert.AlertType.ERROR, "Failed to generate a new Register ID").show();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
@@ -250,18 +248,22 @@ public class registerFormController {
     }
 
     public void makeRegisterOnAction(ActionEvent actionEvent) throws Exception {
-        RegisterDTO registerDTO = new RegisterDTO(
+        RegistrationDTO registrationDTO= new RegistrationDTO(
                 txtRegisterStudentID.getText(),
                 String.valueOf(cmdRegisterNIC.getValue()),
+                String.valueOf(cmdRegisterProgramID.getValue()),
                 txtRegisterDate.getText(),
-                txtRegisterTime.getText()
+                txtRegisterTime.getText(),
+                tblRegistration.getItems().stream().map(tm ->
+                        new RegisterDetailDTO(tm.getProgramID(),tm.getNic())).collect(Collectors.toList())
+
 
         );
 
-        if (registerBOImpl.purchaseOrder(registerDTO)) {
-            new Alert(Alert.AlertType.INFORMATION, "Order has been placed successfully").show();
+        if (registerBOImpl.purchaseOrder(registrationDTO)) {
+            new Alert(Alert.AlertType.INFORMATION, "Registered Successfully").show();
         } else {
-            new Alert(Alert.AlertType.ERROR, "Order has not been placed successfully").show();
+            new Alert(Alert.AlertType.ERROR, "Try Again ").show();
         }
 
         registerID = generateOrderId();

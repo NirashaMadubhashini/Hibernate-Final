@@ -88,14 +88,20 @@ public class RegisterDAOImpl implements RegisterDAO {
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
 
-        String hql = "SELECT registerID FROM Register WHERE registerID=registerID";
-        Query query = session.createQuery(hql);
+
+        String hql = "FROM Register r WHERE r.registerID = :registerID";
+        Query query = session.createQuery(hql).setString("registerID",registerID);
+        List resultList = query.getResultList();
+
+        if (resultList.size() > 0){
+            return  true;
+        }
 
         transaction.commit();
 
         session.close();
 
-        return true;
+        return false;
     }
 
     @Override
@@ -105,14 +111,14 @@ public class RegisterDAOImpl implements RegisterDAO {
         Transaction transaction = session.beginTransaction();
 
 
-        String hql = "FROM Register r ORDER BY r.registerID desc";
+        String hql = "FROM Register r ORDER BY r.registerID asc ";
         Query query = session.createQuery(hql);
         List resultList = query.getResultList();
         transaction.commit();
         session.close();
         if (resultList.size() > 0){
             int tempId = Integer.
-                    parseInt(resultList.get(0).toString().split("-")[1]);
+                    parseInt(((Register) resultList.get(0)).getRegisterID().split("-")[1]);
             tempId = tempId + 1;
             if (tempId <= 9) {
                 return "O-00" + tempId;
