@@ -3,6 +3,7 @@ package lk.sipsewanainstitute.hibernate.dao;
 
 import lk.sipsewanainstitute.hibernate.dao.custom.impl.ProgramDAOImpl;
 import lk.sipsewanainstitute.hibernate.dao.custom.impl.RegisterDAOImpl;
+import lk.sipsewanainstitute.hibernate.dao.custom.impl.RegisterDetailDAOImpl;
 import lk.sipsewanainstitute.hibernate.dao.custom.impl.StudentDAOImpl;
 
 public class DAOFactory {
@@ -26,12 +27,14 @@ public class DAOFactory {
                 return new ProgramDAOImpl();
             case REGISTER:
                 return new RegisterDAOImpl();
+            case REGISTERDETAIL:
+                return new RegisterDetailDAOImpl();
             default:
                 return null;
         }
     }
 
     public enum DAOTypes {
-        STUDENT, PROGRAM,REGISTER
+        STUDENT, PROGRAM, REGISTER, REGISTERDETAIL
     }
 }
