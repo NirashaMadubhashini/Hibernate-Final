@@ -29,15 +29,6 @@ public class StudentDTO {
         this.time = time;
     }
 
-//    public StudentDTO(String name, String birthDay, String address, int age, String gender, String mobileNumber){
-//        this.name = name;
-//        this.birthDay = birthDay;
-//        this.address = address;
-//        this.age = age;
-//        this.gender = gender;
-//        this.mobileNumber = mobileNumber;
-//    }
-
     public StudentDTO(String nic,String name, String birthDay, String address, int age, String gender, String mobileNumber) {
         this.nic = nic;
         this.name = name;

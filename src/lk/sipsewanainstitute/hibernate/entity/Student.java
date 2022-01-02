@@ -17,17 +17,17 @@ public class Student implements SuperEntity{
     private String date;
     private String time;
 
-    @OneToMany(mappedBy = "student",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "student", fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     private List<Register> registers;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    private List<Program> programList = new ArrayList<>();
+    @OneToMany(mappedBy = "sid")
+    private List<RegisterDetail> sid;
 
     public Student() {
     }
 
-    public Student(String nic, String name, String birthDay, String address, int age, String mobileNumber, String gender
-            , String date, String time, List<Register> registers, List<Program> programList) {
+    public Student(String nic, String name, String birthDay, String address, int age, String mobileNumber, String gender,
+                   String date, String time, List<Register> registers, List<RegisterDetail> sid) {
         this.nic = nic;
         this.name = name;
         this.birthDay = birthDay;
@@ -38,7 +38,7 @@ public class Student implements SuperEntity{
         this.date = date;
         this.time = time;
         this.registers = registers;
-        this.programList = programList;
+        this.sid = sid;
     }
 
     public Student(String nic, String name, String birthDay, String address, int age, String mobileNumber, String gender, String date, String time) {
@@ -143,11 +143,13 @@ public class Student implements SuperEntity{
         this.registers = registers;
     }
 
-    public List<Program> getProgramList() {
-        return programList;
+    public List<RegisterDetail> getSid() {
+        return sid;
     }
 
-    public void setProgramList(List<Program> programList) {
-        this.programList = programList;
+    public void setSid(List<RegisterDetail> sid) {
+        this.sid = sid;
     }
+
+
 }

@@ -65,7 +65,7 @@ public class studentFormController {
     Pattern nicPattern = Pattern.compile("^[0-9 A-z]{0,}$");
     Pattern birthdayPattern = Pattern.compile("^[0-9].{3,}?$");
     Pattern addressPattern = Pattern.compile("^[A-z ]{3,30}([0-9]{1,2})?$");
-    Pattern agePattern = Pattern.compile("^[0-9 ]{2,}$");
+    Pattern agePattern = Pattern.compile("^[0-9]{2,}$");
     Pattern mobilePattern = Pattern.compile("^[0-9]{0,}$");
 
 
@@ -170,7 +170,7 @@ public class studentFormController {
             }
 
         } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR, "Failed to save the customer " + e.getMessage()).show();
+            new Alert(Alert.AlertType.ERROR, "Failed to save the Student " + e.getMessage()).show();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
@@ -195,7 +195,7 @@ public class studentFormController {
                     ButtonType no = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
 
                     Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
-                            "Are you sure you want to delete this Supplier?", yes, no);
+                            "Are you sure you want to delete this Student?", yes, no);
                     alert.setTitle("Conformation Alert");
                     Optional<ButtonType> result = alert.showAndWait();
 
@@ -239,7 +239,7 @@ public class studentFormController {
             tblStudent.getSelectionModel().clearSelection();
 
         } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR, "Failed to delete the customer " + name).show();
+            new Alert(Alert.AlertType.ERROR, "Failed to delete the Student " + name).show();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
