@@ -79,12 +79,6 @@ public class ProgramDAOImpl implements ProgramDAO {
         transaction.commit();
 
         session.close();
-//        System.out.println(list);
-//        for (Program p:list
-//             ) {
-//            System.out.println(p.getProgramID()+p.getProgramName()+p.getDuration()+p.getFee()+p.getDate()+p.getTime());
-//
-//        }
         return list;
     }
 

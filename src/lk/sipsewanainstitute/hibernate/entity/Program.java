@@ -14,8 +14,10 @@ public class Program implements SuperEntity{
     private String date;
     private String time;
 
-    @ManyToMany(mappedBy = "programList", fetch = FetchType.EAGER,cascade = CascadeType.ALL)
-    private List<Student> studentList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "pid", fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    private List<RegisterDetail> pid;
+
 
     public Program() {
     }
@@ -29,16 +31,15 @@ public class Program implements SuperEntity{
         this.time = time;
     }
 
-    public Program(String programID, String programName, String duration, double fee, String date, String time, List<Student> studentList) {
+    public Program(String programID, String programName, String duration, double fee, String date, String time, List<RegisterDetail> pid) {
         this.programID = programID;
         this.programName = programName;
         this.duration = duration;
         this.fee = fee;
         this.date = date;
         this.time = time;
-        this.studentList = studentList;
+        this.pid = pid;
     }
-
 
     public String getProgramID() {
         return programID;
@@ -88,11 +89,11 @@ public class Program implements SuperEntity{
         this.time = time;
     }
 
-    public List<Student> getStudentList() {
-        return studentList;
+    public List<RegisterDetail> getPid() {
+        return pid;
     }
 
-    public void setStudentList(List<Student> studentList) {
-        this.studentList = studentList;
+    public void setPid(List<RegisterDetail> pid) {
+        this.pid = pid;
     }
 }

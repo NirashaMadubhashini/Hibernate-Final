@@ -56,10 +56,10 @@ public class programFormController {
     private final ProgramBO programBO = (ProgramBO) getBOFactory().getBO(BOFactory.BoTypes.PROGRAM);
 
     LinkedHashMap<TextField, Pattern> map = new LinkedHashMap();
-    Pattern idPattern = Pattern.compile("^(P)[0-9]{3,4}$");
+    Pattern idPattern = Pattern.compile("^(CT)[0-9]{3,4}$");
     Pattern namePattern = Pattern.compile("^[A-z ]{0,}$");
-    Pattern durationPattern = Pattern.compile("^[0-9 A-z ]{2,}$");
-    Pattern feePattern = Pattern.compile("^[0-9]?$");
+    Pattern durationPattern = Pattern.compile("^[0-9 A-z]{2,}$");
+    Pattern feePattern = Pattern.compile("^[0-9]{2,}$");
 
 
     public void initialize() throws IOException, SQLException, ClassNotFoundException {
@@ -145,7 +145,7 @@ public class programFormController {
             }
 
         } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR, "Failed to save the customer " + e.getMessage()).show();
+            new Alert(Alert.AlertType.ERROR, "Failed to save the Program " + e.getMessage()).show();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (Exception e) {
@@ -172,7 +172,7 @@ public class programFormController {
                     ButtonType no = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
 
                     Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
-                            "Are you sure you want to delete this Supplier?", yes, no);
+                            "Are you sure you want to delete this Program?", yes, no);
                     alert.setTitle("Conformation Alert");
                     Optional<ButtonType> result = alert.showAndWait();
 
@@ -220,7 +220,7 @@ public class programFormController {
             tblProgram.getItems().remove(tblProgram.getSelectionModel().getSelectedItem());
             tblProgram.getSelectionModel().clearSelection();
         } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR,"Failed to delete the customer "+programName ).show();
+            new Alert(Alert.AlertType.ERROR,"Failed to delete the Program "+programName ).show();
         }catch (ClassNotFoundException e){
             e.printStackTrace();
         }
