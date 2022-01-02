@@ -33,7 +33,6 @@ public class allProgramFormController {
     public TableColumn colProgramDetailFee;
     public TableColumn colProgramDetailDate;
     public TableColumn colProgramDetailTime;
-    public TextField txtSearchProgram;
 
     private final ProgramBO programBO = (ProgramBO) getBOFactory().getBO(BOFactory.BoTypes.PROGRAM);
 
