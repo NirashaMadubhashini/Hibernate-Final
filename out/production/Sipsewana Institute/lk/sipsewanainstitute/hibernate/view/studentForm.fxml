@@ -21,7 +21,7 @@
                 <Blend />
             </effect>
             <children>
-                <TextField fx:id="txtNIC" layoutX="641.0" layoutY="91.0" onKeyReleased="#textFieldKeyReleased" prefHeight="35.0" prefWidth="300.0">
+                <TextField fx:id="txtNIC" layoutX="641.0" layoutY="91.0" onKeyReleased="#NICKeyReleased" prefHeight="35.0" prefWidth="300.0">
                     <cursor>
                         <Cursor fx:constant="HAND" />
                     </cursor>
@@ -43,7 +43,7 @@
                         <Font name="System Bold" size="20.0" />
                     </font>
                 </Text>
-                <TextField fx:id="txtName" layoutX="231.0" layoutY="91.0" onKeyReleased="#textFieldKeyReleased" prefHeight="35.0" prefWidth="300.0">
+                <TextField fx:id="txtName" layoutX="231.0" layoutY="91.0" onKeyReleased="#NameKeyReleased" prefHeight="35.0" prefWidth="300.0">
                     <cursor>
                         <Cursor fx:constant="HAND" />
                     </cursor>
@@ -53,7 +53,7 @@
                         <Font name="System Bold" size="20.0" />
                     </font>
                 </Text>
-                <TextField fx:id="txtMobile" layoutX="1150.0" layoutY="136.0" onKeyReleased="#textFieldKeyReleased" prefHeight="35.0" prefWidth="300.0">
+                <TextField fx:id="txtMobile" layoutX="1150.0" layoutY="136.0" onKeyReleased="#MobileKeyReleased" prefHeight="35.0" prefWidth="300.0">
                     <cursor>
                         <Cursor fx:constant="HAND" />
                     </cursor>
@@ -63,7 +63,7 @@
                         <Font name="System Bold" size="20.0" />
                     </font>
                 </Text>
-                <TextField fx:id="txtAge" layoutX="641.0" layoutY="139.0" onKeyReleased="#textFieldKeyReleased" prefHeight="35.0" prefWidth="100.0">
+                <TextField fx:id="txtAge" layoutX="641.0" layoutY="139.0" onKeyReleased="#AgeKeyReleased" prefHeight="35.0" prefWidth="100.0">
                     <cursor>
                         <Cursor fx:constant="HAND" />
                     </cursor>
@@ -78,7 +78,7 @@
                         <Font name="System Bold" size="20.0" />
                     </font>
                 </Text>
-                <TextField fx:id="txtBirth" layoutX="1150.0" layoutY="88.0" onKeyReleased="#textFieldKeyReleased" prefHeight="35.0" prefWidth="300.0" promptText="                   DD / MM / YYYY">
+                <TextField fx:id="txtBirth" layoutX="1150.0" layoutY="88.0" onKeyReleased="#Birth_KeyReleased" prefHeight="35.0" prefWidth="300.0" promptText="                   DD / MM / YYYY">
                     <cursor>
                         <Cursor fx:constant="HAND" />
                     </cursor>
@@ -96,7 +96,7 @@
                         <Cursor fx:constant="HAND" />
                     </cursor>
                 </JFXButton>
-                <TextField fx:id="txtAddress" layoutX="231.0" layoutY="139.0" onKeyReleased="#textFieldKeyReleased" prefHeight="35.0" prefWidth="300.0">
+                <TextField fx:id="txtAddress" layoutX="231.0" layoutY="139.0" onKeyReleased="#AddressKeyReleased" prefHeight="35.0" prefWidth="300.0">
                     <cursor>
                         <Cursor fx:constant="HAND" />
                     </cursor>
