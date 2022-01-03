@@ -13,10 +13,8 @@ import javafx.stage.Stage;
 import lk.sipsewanainstitute.hibernate.business.BOFactory;
 import lk.sipsewanainstitute.hibernate.business.custom.StudentBO;
 import lk.sipsewanainstitute.hibernate.dto.StudentDTO;
-import lk.sipsewanainstitute.hibernate.entity.Student;
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.Optional;
 
 import static lk.sipsewanainstitute.hibernate.business.BOFactory.getBOFactory;
@@ -45,8 +43,8 @@ public class updateStudentFormController {
                     txtUpdateBirthDay.getText(),
                     txtUpdateAddress.getText(),
                     Integer.parseInt(txtUpdateAge.getText()),
-                    txtUpdateGender.getText(),
                     txtUpdateMobile.getText(),
+                    txtUpdateGender.getText(),
                     date,
                     time
             ))) {
