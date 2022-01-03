@@ -81,6 +81,7 @@ public class RegisterBOImpl implements RegisterBO {
         for (Register register : all) {
             dtoList.add(new RegisterDTO(
                     register.getRegisterID(),
+                    register.getStudent().getNic(),
                     register.getOrderDate(),
                     register.getOrderTime()
             ));
@@ -88,25 +89,6 @@ public class RegisterBOImpl implements RegisterBO {
         return dtoList;
     }
 
-//    @Override
-//    public boolean add(RegisterDTO registerDTO) throws Exception {
-//        return registerDAO.add(new Register(
-//                registerDTO.getRegisterID(),
-//                registerDTO.getOrderDate(),
-//                registerDTO.getOrderTime(),
-//                registerDTO.getNic()
-//        ));
-//    }
-
-//    @Override
-//    public boolean update(RegisterDTO registerDTO) throws Exception {
-//        return registerDAO.update(new Register(
-//                registerDTO.getRegisterID(),
-//                registerDTO.getNic(),
-//                registerDTO.getOrderDate(),
-//                registerDTO.getOrderTime()
-//        ));
-//    }
 
     @Override
     public boolean ifRegisterExist(String id) throws SQLException, ClassNotFoundException {
