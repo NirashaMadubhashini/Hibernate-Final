@@ -20,7 +20,7 @@
                 <Blend />
             </effect>
             <children>
-                <TextField fx:id="txtProgramID" layoutX="305.0" layoutY="91.0" onKeyReleased="#textFieldsKeyReleased" prefHeight="35.0" prefWidth="300.0" promptText="P001">
+                <TextField fx:id="txtProgramID" layoutX="305.0" layoutY="91.0" onKeyReleased="#ProgramIDKeyReleased" prefHeight="35.0" prefWidth="300.0" promptText="P001">
                     <cursor>
                         <Cursor fx:constant="HAND" />
                     </cursor>
@@ -30,19 +30,19 @@
                         <Font name="System Bold" size="20.0" />
                     </font>
                 </Text>
-                <TextField fx:id="txtProgramDate" editable="false" layoutX="781.0" layoutY="154.0" onKeyReleased="#textFieldsKeyReleased" prefHeight="35.0" prefWidth="300.0" />
+                <TextField fx:id="txtProgramDate" editable="false" layoutX="781.0" layoutY="154.0" prefHeight="35.0" prefWidth="300.0" />
                 <Text layoutX="710.0" layoutY="180.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date">
                     <font>
                         <Font name="System Bold" size="20.0" />
                     </font>
                 </Text>
-                <TextField fx:id="txtProgramTime" editable="false" layoutX="1267.0" layoutY="155.0" onKeyReleased="#textFieldsKeyReleased" prefHeight="35.0" prefWidth="300.0" />
+                <TextField fx:id="txtProgramTime" editable="false" layoutX="1267.0" layoutY="155.0" prefHeight="35.0" prefWidth="300.0" />
                 <Text layoutX="1199.0" layoutY="180.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time">
                     <font>
                         <Font name="System Bold" size="20.0" />
                     </font>
                 </Text>
-                <TextField fx:id="txtProgramDuration" layoutX="1267.0" layoutY="91.0" onKeyReleased="#textFieldsKeyReleased" prefHeight="35.0" prefWidth="300.0">
+                <TextField fx:id="txtProgramDuration" layoutX="1267.0" layoutY="91.0" onKeyReleased="#DurationKeyReleased" prefHeight="35.0" prefWidth="300.0">
                     <cursor>
                         <Cursor fx:constant="HAND" />
                     </cursor>
@@ -52,7 +52,7 @@
                         <Font name="System Bold" size="20.0" />
                     </font>
                 </Text>
-                <TextField fx:id="txtProgramName" layoutX="779.0" layoutY="91.0" onKeyReleased="#textFieldsKeyReleased" prefHeight="35.0" prefWidth="300.0">
+                <TextField fx:id="txtProgramName" layoutX="779.0" layoutY="91.0" onKeyReleased="#PNameKeyReleased" prefHeight="35.0" prefWidth="300.0">
                     <cursor>
                         <Cursor fx:constant="HAND" />
                     </cursor>
@@ -62,7 +62,7 @@
                         <Font name="System Bold" size="20.0" />
                     </font>
                 </Text>
-                <TextField fx:id="txtProgramFee" layoutX="305.0" layoutY="155.0" onKeyReleased="#textFieldsKeyReleased" prefHeight="35.0" prefWidth="300.0">
+                <TextField fx:id="txtProgramFee" layoutX="305.0" layoutY="155.0" onKeyReleased="#FeeKeyReleased" prefHeight="35.0" prefWidth="300.0">
                     <cursor>
                         <Cursor fx:constant="HAND" />
                     </cursor>
