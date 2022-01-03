@@ -24,6 +24,7 @@ public class RegisterTM {
         this.fee = fee;
     }
 
+
     public String getRegisterID() {
         return registerID;
     }
