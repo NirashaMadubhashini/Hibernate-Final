@@ -40,6 +40,7 @@ public class StudentDTO {
     }
 
 
+
     public String getNic() {
         return nic;
     }
