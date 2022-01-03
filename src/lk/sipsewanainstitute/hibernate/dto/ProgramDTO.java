@@ -27,6 +27,12 @@ public class ProgramDTO {
         this.fee = fee;
     }
 
+    public ProgramDTO(String programId, String programName, double fee) {
+        this.programID = programId;
+        this.programName = programName;
+        this.fee = fee;
+    }
+
     public String getProgramID() {
         return programID;
     }
