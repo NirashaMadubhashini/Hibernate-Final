@@ -86,7 +86,7 @@ public class StudentDAOImpl implements StudentDAO {
     }
 
     @Override
-    public boolean ifStudentExist(String id) throws SQLException, ClassNotFoundException {
+    public boolean ifStudentExist(String nic) throws SQLException, ClassNotFoundException {
         return false;
     }
 }
