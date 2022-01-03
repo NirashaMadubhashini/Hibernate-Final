@@ -55,11 +55,6 @@ public class programFormController {
 
     private final ProgramBO programBO = (ProgramBO) getBOFactory().getBO(BOFactory.BoTypes.PROGRAM);
 
-    LinkedHashMap<TextField, Pattern> map = new LinkedHashMap();
-    Pattern idPattern = Pattern.compile("^(CT)[0-9]{3,4}$");
-    Pattern namePattern = Pattern.compile("^[A-z ]{0,}$");
-    Pattern durationPattern = Pattern.compile("^[0-9 A-z]{2,}$");
-    Pattern feePattern = Pattern.compile("^[0-9]{2,}$");
 
 
     public void initialize() throws IOException, SQLException, ClassNotFoundException {
@@ -75,33 +70,19 @@ public class programFormController {
         loadDateAndTime();
         tableListener();
         loadAllPrograms();
-        storeValidation();
+     btnAddProgram.setDisable(true);
 
         updateProgramFormController.programFormContext=programFormContext;
     }
 
-    private void storeValidation() {
-        map.put(txtProgramID, idPattern);
-        map.put(txtProgramName, namePattern);
-        map.put(txtProgramDuration, durationPattern);
-        map.put(txtProgramFee, feePattern);
-    }
 
     private void tableListener() {
         tblProgram.getSelectionModel().selectedItemProperty().
                 addListener((observable, oldValue, newValue) -> {
-                    setData(newValue);
+
                 });
     }
 
-    private void setData(ProgramTM tm) {
-        txtProgramID.setText(tm.getProgramID());
-        txtProgramName.setText(tm.getProgramName());
-        txtProgramDuration.setText(tm.getDuration());
-        txtProgramFee.setText(String.valueOf(tm.getFee()));
-        txtProgramDate.setText(tm.getDate());
-        txtProgramTime.setText(tm.getTime());
-    }
 
     private void loadDateAndTime() {
         Date date = new Date();
@@ -121,8 +102,8 @@ public class programFormController {
         time.play();
     }
 
-    boolean existProgram(String id) throws SQLException, ClassNotFoundException {
-        return programBO.ifProgramExist(id);
+    boolean existProgram(String programID ) throws SQLException, ClassNotFoundException {
+        return programBO.ifProgramExist(programID );
     }
 
     public void addNewProgramOnAction(ActionEvent actionEvent) {
@@ -246,14 +227,81 @@ public class programFormController {
         window.setScene(new Scene(FXMLLoader.load(getClass().getResource("/lk/sipsewanainstitute/hibernate/view/dashBoardForm.fxml"))));
     }
 
-    public void textFieldsKeyReleased(KeyEvent keyEvent) {
-        Object response = ValidationUtil.validate(map, btnAddProgram);
+    public void ProgramIDKeyReleased(KeyEvent keyEvent) {
         if (keyEvent.getCode() == KeyCode.ENTER) {
-            if (response instanceof TextField) {
-                TextField errorText = (TextField) response;
-                errorText.requestFocus();
-            } else if (response instanceof Boolean) {
-                new Alert(Alert.AlertType.WARNING, "Empty Result Set").showAndWait();
+
+            String regEx ="^(CT)[0-9]{3,}$";
+            String typeText =txtProgramID.getText();
+            Pattern compile = Pattern.compile(regEx);
+            boolean matches = compile.matcher(typeText).matches();
+
+
+            if (keyEvent.getCode() == KeyCode.ENTER) {
+                if (matches) {
+                    txtProgramID.setStyle("-fx-text-fill: green");
+                    txtProgramName.requestFocus();
+                } else {
+                    txtProgramID.setStyle("-fx-text-fill: red");
+                }
+            }
+        }
+    }
+    public void PNameKeyReleased(KeyEvent keyEvent) {
+        if (keyEvent.getCode() == KeyCode.ENTER) {
+
+            String regEx ="^[A-z ]{0,}$";
+            String typeText =txtProgramName.getText();
+            Pattern compile = Pattern.compile(regEx);
+            boolean matches = compile.matcher(typeText).matches();
+
+
+            if (keyEvent.getCode() == KeyCode.ENTER) {
+                if (matches) {
+                    txtProgramName.setStyle("-fx-text-fill: green");
+                    txtProgramDuration.requestFocus();
+                } else {
+                    txtProgramName.setStyle("-fx-text-fill: red");
+                }
+            }
+        }
+    }
+
+    public void DurationKeyReleased(KeyEvent keyEvent) {
+        if (keyEvent.getCode() == KeyCode.ENTER) {
+
+            String regEx ="^[0-9 A-z]{2,}$";
+            String typeText =txtProgramDuration.getText();
+            Pattern compile = Pattern.compile(regEx);
+            boolean matches = compile.matcher(typeText).matches();
+
+
+            if (keyEvent.getCode() == KeyCode.ENTER) {
+                if (matches) {
+                    txtProgramDuration.setStyle("-fx-text-fill: green");
+                    txtProgramFee.requestFocus();
+                } else {
+                    txtProgramDuration.setStyle("-fx-text-fill: red");
+                }
+            }
+        }
+    }
+    public void FeeKeyReleased(KeyEvent keyEvent) {
+        if (keyEvent.getCode() == KeyCode.ENTER) {
+
+            String regEx ="^[0-9]{2,}$";
+            String typeText = txtProgramFee.getText();
+            Pattern compile = Pattern.compile(regEx);
+            boolean matches = compile.matcher(typeText).matches();
+
+
+            if (keyEvent.getCode() == KeyCode.ENTER) {
+                if (matches) {
+                    txtProgramFee.setStyle("-fx-text-fill: green");
+                    btnAddProgram.setDisable(false);
+                } else {
+                    txtProgramFee.setStyle("-fx-text-fill: red");
+                    btnAddProgram.setDisable(true);
+                }
             }
         }
     }
