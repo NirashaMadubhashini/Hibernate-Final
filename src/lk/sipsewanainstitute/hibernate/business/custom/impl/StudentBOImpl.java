@@ -67,8 +67,8 @@ public class StudentBOImpl implements StudentBO {
     }
 
     @Override
-    public boolean ifStudentExist(String id) throws SQLException, ClassNotFoundException {
-        return studentDAO.ifStudentExist(id);
+    public boolean ifStudentExist(String nic) throws SQLException, ClassNotFoundException {
+        return studentDAO.ifStudentExist(nic);
     }
 
     @Override
@@ -79,7 +79,6 @@ public class StudentBOImpl implements StudentBO {
     @Override
     public StudentDTO find(String id) throws Exception {
         Student student= studentDAO.find(id);
-        return new StudentDTO(student.getNic(), student.getName(), student.getBirthDay(),
-                student.getAddress(), student.getAge(), student.getGender(),student.getMobileNumber());
+        return new StudentDTO(student.getNic(), student.getName(),student.getBirthDay(),student.getAddress(),student.getAge(),student.getGender(),student.getGender());
     }
 }
