@@ -5,28 +5,26 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import lk.sipsewanainstitute.hibernate.business.BOFactory;
+import lk.sipsewanainstitute.hibernate.business.custom.ProgramBO;
 import lk.sipsewanainstitute.hibernate.business.custom.RegisterBO;
 import lk.sipsewanainstitute.hibernate.business.custom.StudentBO;
 import lk.sipsewanainstitute.hibernate.dto.RegisterDTO;
 import lk.sipsewanainstitute.hibernate.dto.StudentDTO;
-import lk.sipsewanainstitute.hibernate.entity.Register;
-import lk.sipsewanainstitute.hibernate.entity.Student;
-import lk.sipsewanainstitute.hibernate.view.tm.ProgramDetailTM;
 import lk.sipsewanainstitute.hibernate.view.tm.RegisterTM;
-import lk.sipsewanainstitute.hibernate.view.tm.StudentDetailTM;
+
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class allRegisterFormController {
     private final RegisterBO registerBO = (RegisterBO) BOFactory.getBOFactory().getBO(BOFactory.BoTypes.REGISTER);
+    private final StudentBO studentBO = (StudentBO) BOFactory.getBOFactory().getBO(BOFactory.BoTypes.STUDENT);
+    private final ProgramBO programBO = (ProgramBO) BOFactory.getBOFactory().getBO(BOFactory.BoTypes.PROGRAM);
 
     public AnchorPane allRegisterFormContext;
     public TableView<RegisterTM> tblRegisterDetail;
@@ -38,9 +36,6 @@ public class allRegisterFormController {
     public TableColumn colRegisterDetailProgramID;
     public TableColumn colRegisterDetailProgramName;
     public TableColumn colRegisterDetailProgramFee;
-
-
-    static ArrayList<Register> registerList = new ArrayList();
 
     public void initialize() {
         colRegisterDetailID.setCellValueFactory(new PropertyValueFactory<>("registerID"));
@@ -59,16 +54,17 @@ public class allRegisterFormController {
     private void loadAllStudentDetails() {
         tblRegisterDetail.getItems().clear();
         try {
-            List<RegisterDTO>allRegistrations = registerBO.findAll();
-            for (RegisterDTO allRegistration : allRegistrations) {
-
-//                tblRegisterDetail.getItems().add(new RegisterTM(allRegistration .getRegisterID(),allRegistration .getNic(),allRegistration.getName(),
-//                        allRegistration.getAge(), allRegistration.getGender(), allRegistration.getProgramID(),allRegistration.getProgramName(),allRegistration.getFee()));
-
-
+            List<RegisterDTO> allRegister= registerBO.findAll();
+            for (RegisterDTO registerDTO :allRegister) {
+                tblRegisterDetail.getItems().add(new RegisterTM(registerDTO.getRegisterID(),registerDTO.getNic(),registerDTO.getName(),registerDTO.getAge(),
+                        registerDTO.getGender(),registerDTO.getProgramID(),registerDTO.getProgramName(),registerDTO.getFee()));
             }
 
-
+//            List<StudentDTO> allStudents= studentBO.findAll();
+//            for (StudentDTO studentDTO :allStudents) {
+//                tblRegisterDetail.getItems().add(new RegisterTM(studentDTO.getNic(),studentDTO.getName(),studentDTO.getAge(),
+//                        studentDTO.getGender()));
+//            }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         } catch (ClassNotFoundException classNotFoundException) {
@@ -78,6 +74,7 @@ public class allRegisterFormController {
         }
         tblRegisterDetail.getItems();
     }
+
 
     public void backToRegisterDetailDashBoardOnAction(ActionEvent actionEvent) throws IOException {
         Stage window = (Stage) allRegisterFormContext.getScene().getWindow();
