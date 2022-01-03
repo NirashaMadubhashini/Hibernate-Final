@@ -3,6 +3,7 @@ package lk.sipsewanainstitute.hibernate.dao.custom.impl;
 
 import lk.sipsewanainstitute.hibernate.dao.custom.ProgramDAO;
 import lk.sipsewanainstitute.hibernate.entity.Program;
+import lk.sipsewanainstitute.hibernate.entity.Student;
 import lk.sipsewanainstitute.hibernate.util.FactoryConfiguration;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -83,7 +84,7 @@ public class ProgramDAOImpl implements ProgramDAO {
     }
 
     @Override
-    public boolean ifProgramExist(String id) throws SQLException, ClassNotFoundException {
+    public boolean ifProgramExist(String programID ) throws SQLException, ClassNotFoundException {
         return false;
     }
 }
