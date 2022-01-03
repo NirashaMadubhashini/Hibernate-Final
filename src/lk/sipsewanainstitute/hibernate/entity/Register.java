@@ -12,7 +12,7 @@ public class Register implements SuperEntity{
     private String orderDate;
     private String orderTime;
 
-    @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Student student;
 
     public Register() {
