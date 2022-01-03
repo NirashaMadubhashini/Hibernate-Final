@@ -60,14 +60,6 @@ public class studentFormController {
 
     private final StudentBO studentBO = (StudentBO) getBOFactory().getBO(BOFactory.BoTypes.STUDENT);
 
-    LinkedHashMap<TextField, Pattern> map = new LinkedHashMap();
-    Pattern namePattern = Pattern.compile("^[A-z ]{2,}$");
-    Pattern nicPattern = Pattern.compile("^[0-9 A-z]{0,}$");
-    Pattern birthdayPattern = Pattern.compile("^[0-9].{3,}?$");
-    Pattern addressPattern = Pattern.compile("^[A-z ]{3,30}([0-9]{1,2})?$");
-    Pattern agePattern = Pattern.compile("^[0-9]{2,}$");
-    Pattern mobilePattern = Pattern.compile("^[0-9]{0,}$");
-
 
     public void initialize() throws Exception {
 
@@ -83,24 +75,16 @@ public class studentFormController {
         colUpdate.setCellValueFactory(new PropertyValueFactory<>("update"));
         colDelete.setCellValueFactory(new PropertyValueFactory<>("delete"));
 
-        storeValidations();
         loadDateAndTime();
         tableListener();
         loadAllStudent();
+        btnAddStudent.setDisable(true);
 
         cmdGender.getItems().addAll("Male", "Female");
 
         updateStudentFormController.studentFormContext =studentFormContext;
     }
 
-    private void storeValidations() {
-        map.put(txtName, namePattern);
-        map.put(txtNIC, nicPattern);
-        map.put(txtBirth, birthdayPattern);
-        map.put(txtAddress, addressPattern);
-        map.put(txtAge, agePattern);
-        map.put(txtMobile, mobilePattern);
-    }
     private void tableListener() {
         tblStudent.getSelectionModel().selectedItemProperty().
                 addListener((observable, oldValue, newValue) -> {
@@ -170,7 +154,7 @@ public class studentFormController {
             }
 
         } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR, "Failed to save the Student " + e.getMessage()).show();
+            new Alert(Alert.AlertType.WARNING, e.getMessage());
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
@@ -232,11 +216,8 @@ public class studentFormController {
         String name = tblStudent.getSelectionModel().getSelectedItem().getNic();
         try {
             if (!existStudent(name)) {
-                new Alert(Alert.AlertType.CONFIRMATION, "Successfully Deleted.. " + name).show();
+                new Alert(Alert.AlertType.ERROR, "Can't delete this Student..Student NIC is in the Associate table").show();
             }
-            studentBO.delete(name);
-            tblStudent.getItems().remove(tblStudent.getSelectionModel().getSelectedItem());
-            tblStudent.getSelectionModel().clearSelection();
 
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, "Failed to delete the Student " + name).show();
@@ -268,15 +249,121 @@ public class studentFormController {
         window.setScene(new Scene(FXMLLoader.load(getClass().getResource("/lk/sipsewanainstitute/hibernate/view/dashBoardForm.fxml"))));
     }
 
-
-    public void textFieldKeyReleased(KeyEvent keyEvent) {
-        Object response = ValidationUtil.validate(map, btnAddStudent);
+    public void NameKeyReleased(KeyEvent keyEvent) {
         if (keyEvent.getCode() == KeyCode.ENTER) {
-            if (response instanceof TextField) {
-                TextField errorText = (TextField) response;
-                errorText.requestFocus();
-            } else if (response instanceof Boolean) {
-                new Alert(Alert.AlertType.WARNING, "Empty Result Set").showAndWait();
+
+            String regEx ="^[A-z ]{2,}$";
+            String typeText =txtName.getText();
+            Pattern compile = Pattern.compile(regEx);
+            boolean matches = compile.matcher(typeText).matches();
+
+
+            if (keyEvent.getCode() == KeyCode.ENTER) {
+                if (matches) {
+                    txtName.setStyle("-fx-text-fill: green");
+                    txtNIC.requestFocus();
+                } else {
+                    txtName.setStyle("-fx-text-fill: red");
+                }
+            }
+        }
+    }
+    public void NICKeyReleased(KeyEvent keyEvent) {
+        if (keyEvent.getCode() == KeyCode.ENTER) {
+
+            String regEx ="^[0-9 A-z]{0,}$";
+            String typeText = txtNIC.getText();
+            Pattern compile = Pattern.compile(regEx);
+            boolean matches = compile.matcher(typeText).matches();
+
+
+            if (keyEvent.getCode() == KeyCode.ENTER) {
+                if (matches) {
+                    txtNIC.setStyle("-fx-text-fill: green");
+                    txtBirth.requestFocus();
+                } else {
+                    txtNIC.setStyle("-fx-text-fill: red");
+                }
+            }
+        }
+    }
+    public void Birth_KeyReleased(KeyEvent keyEvent) {
+        if (keyEvent.getCode() == KeyCode.ENTER) {
+
+            String regEx ="^[0-9].{3,}?$";
+            String typeText = txtBirth.getText();
+            Pattern compile = Pattern.compile(regEx);
+            boolean matches = compile.matcher(typeText).matches();
+
+
+            if (keyEvent.getCode() == KeyCode.ENTER) {
+                if (matches) {
+                    txtBirth.setStyle("-fx-text-fill: green");
+                    txtAddress.requestFocus();
+                } else {
+                    txtBirth.setStyle("-fx-text-fill: red");
+                }
+            }
+        }
+    }
+
+    public void AddressKeyReleased(KeyEvent keyEvent) {
+        if (keyEvent.getCode() == KeyCode.ENTER) {
+
+            String regEx ="^[A-z ]{3,30}([0-9]{1,2})?$";
+            String typeText = txtAddress.getText();
+            Pattern compile = Pattern.compile(regEx);
+            boolean matches = compile.matcher(typeText).matches();
+
+
+            if (keyEvent.getCode() == KeyCode.ENTER) {
+                if (matches) {
+                    txtAddress.setStyle("-fx-text-fill: green");
+                    txtAge.requestFocus();
+                } else {
+                    txtAddress.setStyle("-fx-text-fill: red");
+                }
+            }
+        }
+    }
+    public void AgeKeyReleased(KeyEvent keyEvent) {
+        if (keyEvent.getCode() == KeyCode.ENTER) {
+
+            String regEx = "^[0-9]{1,2}$";
+            String typeText = txtAge.getText();
+            Pattern compile = Pattern.compile(regEx);
+            boolean matches = compile.matcher(typeText).matches();
+
+
+            if (keyEvent.getCode() == KeyCode.ENTER) {
+                if (matches) {
+                    txtAge.setStyle("-fx-text-fill: green");
+                    txtMobile.requestFocus();
+                } else {
+                    txtAge.setStyle("-fx-text-fill: red");
+                }
+            }
+        }
+    }
+
+    public void MobileKeyReleased(KeyEvent keyEvent) {
+        if (keyEvent.getCode() == KeyCode.ENTER) {
+
+            String regEx ="^[0-9]{0,}$";
+            String typeText = txtMobile.getText();
+            Pattern compile = Pattern.compile(regEx);
+            boolean matches = compile.matcher(typeText).matches();
+
+
+            if (keyEvent.getCode() == KeyCode.ENTER) {
+                if (matches) {
+                    txtMobile.setStyle("-fx-text-fill: green");
+                    cmdGender.requestFocus();
+                    btnAddStudent.setDisable(false);
+                } else {
+                    txtMobile.setStyle("-fx-text-fill: red");
+                    btnAddStudent.setDisable(true);
+                }
             }
         }
     }
