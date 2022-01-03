@@ -60,8 +60,8 @@ public class ProgramBOImpl implements ProgramBO {
     }
 
     @Override
-    public boolean ifProgramExist(String id) throws SQLException, ClassNotFoundException {
-        return programDAO.ifProgramExist(id);
+    public boolean ifProgramExist(String programID ) throws SQLException, ClassNotFoundException {
+        return programDAO.ifProgramExist(programID );
     }
 
     @Override
@@ -70,9 +70,8 @@ public class ProgramBOImpl implements ProgramBO {
     }
 
     @Override
-    public ProgramDTO find(String id) throws Exception {
-        Program program= programDAO.find(id);
-        return new ProgramDTO(program.getProgramID(), program.getProgramName(),program.getDuration(),
-                program.getFee());
+    public ProgramDTO find(String pid) throws Exception {
+        Program program= programDAO.find(pid);
+        return new ProgramDTO(program.getProgramID(), program.getProgramName(),program.getDuration(),program.getFee());
     }
 }
