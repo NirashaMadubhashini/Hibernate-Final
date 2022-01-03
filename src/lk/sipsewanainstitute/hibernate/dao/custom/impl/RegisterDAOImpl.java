@@ -111,7 +111,7 @@ public class RegisterDAOImpl implements RegisterDAO {
         Transaction transaction = session.beginTransaction();
 
 
-        String hql = "FROM Register r ORDER BY r.registerID asc ";
+        String hql = "FROM Register r ORDER BY r.registerID desc ";
         Query query = session.createQuery(hql);
         List resultList = query.getResultList();
         transaction.commit();
@@ -123,6 +123,8 @@ public class RegisterDAOImpl implements RegisterDAO {
             if (tempId <= 9) {
                 return "O-00" + tempId;
             } else if (tempId <= 99) {
+                return "O-0" + tempId;
+            } else if (tempId <= 999) {
                 return "O-0" + tempId;
             } else {
                 return "O-" + tempId;
