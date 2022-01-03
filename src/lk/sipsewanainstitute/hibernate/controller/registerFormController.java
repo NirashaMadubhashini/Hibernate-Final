@@ -15,6 +15,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import lk.sipsewanainstitute.hibernate.business.BOFactory;
+import lk.sipsewanainstitute.hibernate.business.custom.RegisterBO;
 import lk.sipsewanainstitute.hibernate.business.custom.impl.RegisterBOImpl;
 import lk.sipsewanainstitute.hibernate.dto.*;
 import lk.sipsewanainstitute.hibernate.entity.Register;
@@ -62,7 +63,7 @@ public class registerFormController {
 
     int cartSelectedRowForRemove = -1;
 
-    private final RegisterBOImpl registerBOImpl = (RegisterBOImpl) BOFactory.getBOFactory().getBO(BOFactory.BoTypes.REGISTER);
+    private final RegisterBO registerBO = (RegisterBO) BOFactory.getBOFactory().getBO(BOFactory.BoTypes.REGISTER);
 
     public void initialize() throws IOException, SQLException, ClassNotFoundException {
 
@@ -77,7 +78,7 @@ public class registerFormController {
 
         cmdRegisterNIC.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             try {
-                StudentDTO studentDTO = registerBOImpl.findStudent(newValue + "");
+                StudentDTO studentDTO = registerBO.findStudent(newValue + "");
                 txtRegisterFullName.setText(studentDTO.getName());
                 txtRegisterBirthDay.setText(studentDTO.getBirthDay());
                 txtRegisterAddress.setText(studentDTO.getAddress());
@@ -97,7 +98,7 @@ public class registerFormController {
 
         cmdRegisterProgramID.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             try {
-                ProgramDTO programDTO = registerBOImpl.findProgram(newValue + "");
+                ProgramDTO programDTO = registerBO.findProgram(newValue + "");
                 txtRegisterProgramName.setText(programDTO.getProgramName());
                 txtRegisterProgramDuration.setText(programDTO.getDuration());
                 txtRegisterProgramFee.setText(String.valueOf(programDTO.getFee()));
@@ -114,7 +115,7 @@ public class registerFormController {
             cartSelectedRowForRemove = (int) newValue;
         });
 
-        registerID = generateOrderId();
+        registerID = generateRegisterId();
         txtRegisterStudentID.setText(registerID);
 
 
@@ -126,7 +127,7 @@ public class registerFormController {
 
     private void loadProgramIds() {
         try {
-            ArrayList<ProgramDTO> all = registerBOImpl.getAllPrograms();
+            ArrayList<ProgramDTO> all = registerBO.getAllPrograms();
             for (ProgramDTO dto : all) {
                 cmdRegisterProgramID.getItems().add(dto.getProgramID());
             }
@@ -141,7 +142,7 @@ public class registerFormController {
 
     private void loadStudentIds() {
         try {
-            ArrayList<StudentDTO> all = registerBOImpl.getAllStudents();
+            ArrayList<StudentDTO> all = registerBO.getAllStudents();
             for (StudentDTO studentDTO : all) {
                 cmdRegisterNIC.getItems().add(studentDTO.getNic());
             }
@@ -154,9 +155,9 @@ public class registerFormController {
         }
     }
 
-    private String generateOrderId() {
+    private String generateRegisterId() {
         try {
-            return registerBOImpl.generateNewOrderId();
+            return registerBO.generateNewOrderId();
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, "Failed to generate a new Register ID").show();
         } catch (ClassNotFoundException e) {
@@ -260,14 +261,14 @@ public class registerFormController {
 
         );
 
-        if (registerBOImpl.purchaseOrder(registrationDTO)) {
+        if (registerBO.purchaseOrder(registrationDTO)) {
             new Alert(Alert.AlertType.INFORMATION, "Registered Successfully").show();
         } else {
             new Alert(Alert.AlertType.ERROR, "Try Again ").show();
         }
 
-        registerID = generateOrderId();
-        txtRegisterStudentID.setText(generateOrderId());
+        registerID = generateRegisterId();
+        txtRegisterStudentID.setText(generateRegisterId());
         tblRegistration.getItems().clear();
         clearText();
         calculateCost();
