@@ -5,7 +5,6 @@ import lk.sipsewanainstitute.hibernate.business.SuperBO;
 import lk.sipsewanainstitute.hibernate.dto.ProgramDTO;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 public interface ProgramBO extends SuperBO {
