@@ -1,5 +1,7 @@
 package lk.sipsewanainstitute.hibernate.controller;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -12,8 +14,9 @@ import lk.sipsewanainstitute.hibernate.business.BOFactory;
 import lk.sipsewanainstitute.hibernate.business.custom.ProgramBO;
 import lk.sipsewanainstitute.hibernate.business.custom.RegisterBO;
 import lk.sipsewanainstitute.hibernate.business.custom.StudentBO;
-import lk.sipsewanainstitute.hibernate.dto.RegisterDTO;
-import lk.sipsewanainstitute.hibernate.dto.StudentDTO;
+import lk.sipsewanainstitute.hibernate.dao.custom.impl.RegisterDAOImpl;
+import lk.sipsewanainstitute.hibernate.dto.*;
+import lk.sipsewanainstitute.hibernate.entity.RegisterDetail;
 import lk.sipsewanainstitute.hibernate.view.tm.RegisterTM;
 
 
@@ -54,17 +57,19 @@ public class allRegisterFormController {
     private void loadAllStudentDetails() {
         tblRegisterDetail.getItems().clear();
         try {
-            List<RegisterDTO> allRegister= registerBO.findAll();
-            for (RegisterDTO registerDTO :allRegister) {
-                tblRegisterDetail.getItems().add(new RegisterTM(registerDTO.getRegisterID(),registerDTO.getNic(),registerDTO.getName(),registerDTO.getAge(),
-                        registerDTO.getGender(),registerDTO.getProgramID(),registerDTO.getProgramName(),registerDTO.getFee()));
+            ObservableList<RegisterTM> obList = FXCollections.observableArrayList();
+            List<RegistrationDTO> allRegister = registerBO.findAll();
+
+            for (RegistrationDTO registerDTO : allRegister) {
+                StudentDTO studentDTO = studentBO.getStudent(String.valueOf(registerDTO.getNic()));
+                ProgramDTO programDTO = programBO.getProgram(String.valueOf(registerDTO.getPid()));
+                RegistrationDTO registrationDTO=registerBO.getRegister(registerDTO.getRegisterID());
+
+                obList.add(new RegisterTM(registerDTO.getRegisterID(), studentDTO.getNic(), studentDTO.getName(),
+                        studentDTO.getAge(), studentDTO.getGender(),registerDTO.getPid(),programDTO.getProgramName(),programDTO.getFee()));
             }
 
-//            List<StudentDTO> allStudents= studentBO.findAll();
-//            for (StudentDTO studentDTO :allStudents) {
-//                tblRegisterDetail.getItems().add(new RegisterTM(studentDTO.getNic(),studentDTO.getName(),studentDTO.getAge(),
-//                        studentDTO.getGender()));
-//            }
+            tblRegisterDetail.setItems(obList);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         } catch (ClassNotFoundException classNotFoundException) {

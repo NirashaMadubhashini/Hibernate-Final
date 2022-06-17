@@ -21,7 +21,7 @@ public class ProgramBOImpl implements ProgramBO {
         List<Program> all = programDAO.findAll();
         ArrayList<ProgramDTO> dtoList = new ArrayList<>();
 
-        ProgramDTO programDTO = null;
+//        ProgramDTO programDTO = null;
 
         for (Program program : all) {
             dtoList.add(new ProgramDTO(
@@ -73,5 +73,23 @@ public class ProgramBOImpl implements ProgramBO {
     public ProgramDTO find(String pid) throws Exception {
         Program program= programDAO.find(pid);
         return new ProgramDTO(program.getProgramID(), program.getProgramName(),program.getDuration(),program.getFee());
+    }
+
+    @Override
+    public ProgramDTO getProgram(String programID) throws Exception {
+        List<ProgramDTO> all = findAll();
+        for (ProgramDTO p:all) {
+            if (p.getProgramID().equals(programID)){
+                return new ProgramDTO(
+                        p.getProgramID(),
+                        p.getProgramName(),
+                        p.getDuration(),
+                        p.getFee(),
+                        p.getDate(),
+                        p.getTime()
+                );
+            }
+        }
+        return null;
     }
 }

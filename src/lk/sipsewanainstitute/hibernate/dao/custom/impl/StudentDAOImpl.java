@@ -9,7 +9,6 @@ import org.hibernate.Transaction;
 
 import javax.persistence.Query;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class StudentDAOImpl implements StudentDAO {

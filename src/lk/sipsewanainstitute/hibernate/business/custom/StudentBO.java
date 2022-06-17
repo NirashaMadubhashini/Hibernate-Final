@@ -21,4 +21,6 @@ public interface StudentBO  extends SuperBO {
     boolean delete(String id) throws Exception;
 
     StudentDTO find(String value) throws Exception;
+
+    StudentDTO getStudent(String nic) throws Exception;
 }

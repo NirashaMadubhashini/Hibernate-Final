@@ -1,11 +1,7 @@
 package lk.sipsewanainstitute.hibernate.business.custom;
 
 import lk.sipsewanainstitute.hibernate.business.SuperBO;
-import lk.sipsewanainstitute.hibernate.dto.ProgramDTO;
-import lk.sipsewanainstitute.hibernate.dto.RegisterDTO;
-import lk.sipsewanainstitute.hibernate.dto.RegistrationDTO;
-import lk.sipsewanainstitute.hibernate.dto.StudentDTO;
-import lk.sipsewanainstitute.hibernate.entity.Register;
+import lk.sipsewanainstitute.hibernate.dto.*;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -15,7 +11,7 @@ public interface RegisterBO extends SuperBO {
 
     boolean purchaseOrder(RegistrationDTO dto) throws SQLException, ClassNotFoundException;
 
-    List<RegisterDTO> findAll() throws Exception;
+    List<RegistrationDTO> findAll() throws Exception;
 
 //    boolean add(RegisterDTO registerDTO) throws Exception;
 //
@@ -34,4 +30,8 @@ public interface RegisterBO extends SuperBO {
     ArrayList<StudentDTO> getAllStudents() throws Exception;
 
     ArrayList<ProgramDTO> getAllPrograms() throws Exception;
+
+    RegisterDTO find(String value) throws Exception;
+
+    RegistrationDTO getRegister(String registerID) throws Exception;
 }

@@ -2,13 +2,13 @@ package lk.sipsewanainstitute.hibernate.dao.custom.impl;
 
 import lk.sipsewanainstitute.hibernate.dao.custom.RegisterDAO;
 import lk.sipsewanainstitute.hibernate.entity.Register;
+import lk.sipsewanainstitute.hibernate.entity.RegisterDetail;
+import lk.sipsewanainstitute.hibernate.entity.Student;
 import lk.sipsewanainstitute.hibernate.util.FactoryConfiguration;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.hql.internal.ast.tree.Statement;
 
 import javax.persistence.Query;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 

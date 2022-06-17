@@ -20,4 +20,5 @@ public interface ProgramBO extends SuperBO {
 
     ProgramDTO find(String value) throws Exception;
 
+    ProgramDTO getProgram(String pid) throws Exception;
 }

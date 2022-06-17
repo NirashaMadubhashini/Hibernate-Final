@@ -6,6 +6,8 @@ import lk.sipsewanainstitute.hibernate.dao.custom.ProgramDAO;
 import lk.sipsewanainstitute.hibernate.dao.custom.RegisterDAO;
 import lk.sipsewanainstitute.hibernate.dao.custom.RegisterDetailDAO;
 import lk.sipsewanainstitute.hibernate.dao.custom.StudentDAO;
+import lk.sipsewanainstitute.hibernate.dao.custom.impl.RegisterDAOImpl;
+import lk.sipsewanainstitute.hibernate.dao.custom.impl.RegisterDetailDAOImpl;
 import lk.sipsewanainstitute.hibernate.dto.*;
 import lk.sipsewanainstitute.hibernate.entity.Program;
 import lk.sipsewanainstitute.hibernate.entity.Register;
@@ -24,6 +26,7 @@ public class RegisterBOImpl implements RegisterBO {
     private final StudentDAO studentDAO = (StudentDAO) DAOFactory.getDAOFactory().getDAO(DAOFactory.DAOTypes.STUDENT);
     private final ProgramDAO programDAO = (ProgramDAO) DAOFactory.getDAOFactory().getDAO(DAOFactory.DAOTypes.PROGRAM);
     private final RegisterDetailDAO registerDetailDAO = (RegisterDetailDAO) DAOFactory.getDAOFactory().getDAO(DAOFactory.DAOTypes.REGISTERDETAIL);
+
 
 
     @Override
@@ -70,24 +73,6 @@ public class RegisterBOImpl implements RegisterBO {
         return true;
     }
 
-
-
-    @Override
-    public List<RegisterDTO> findAll() throws Exception {
-        List<Register> all = registerDAO.findAll();
-        ArrayList<RegisterDTO> dtoList = new ArrayList<>();
-
-
-        for (Register register : all) {
-            dtoList.add(new RegisterDTO(
-                    register.getRegisterID(),
-                    register.getStudent().getNic(),
-                    register.getOrderDate(),
-                    register.getOrderTime()
-            ));
-        }
-        return dtoList;
-    }
 
 
     @Override
@@ -139,5 +124,55 @@ public class RegisterBOImpl implements RegisterBO {
                     program.getFee()));
         }
         return allPrograms;
+    }
+
+    @Override
+    public RegisterDTO find(String rid) throws Exception {
+        Register register= registerDAO.find(rid);
+        return new RegisterDTO(register.getRegisterID(),register.getStudent(),register.getOrderDate(),register.getOrderTime());
+    }
+
+    @Override
+    public RegistrationDTO getRegister(String registerID) throws Exception {
+        List<RegistrationDTO> all = findAll();
+        for (RegistrationDTO p:all) {
+            if (p.getRegisterID().equals(registerID)){
+                return new RegistrationDTO(
+                        p.getRegisterID(),
+                        p.getNic(),
+                        p.getPid(),
+                        p.getOrderDate(),
+                        p.getOrderTime(),
+                        p.getRegisterDetail()
+                );
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public List<RegistrationDTO> findAll() throws Exception {
+        List<Register> all = registerDAO.findAll();
+        ArrayList<RegistrationDTO> dtoList = new ArrayList<>();
+
+        for (Register register : all) {
+            dtoList.add(new RegistrationDTO(
+                    register.getRegisterID(),
+                    register.getStudent().getNic(),
+                    getPid(register.getStudent().getNic()),
+                    register.getOrderDate(),
+                    register.getOrderTime()
+            ));
+        }
+        return dtoList;
+    }
+    public String getPid(String NIC) throws Exception {
+        List<RegisterDetail> all = registerDetailDAO.findAll();
+        for (RegisterDetail registerDetail:all) {
+            if (NIC.equals(registerDetail.getSid().getNic())){
+                return registerDetail.getPid().getProgramID();
+            }
+        }
+        return null;
     }
 }

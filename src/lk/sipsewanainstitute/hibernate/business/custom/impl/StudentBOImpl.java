@@ -81,4 +81,25 @@ public class StudentBOImpl implements StudentBO {
         Student student= studentDAO.find(id);
         return new StudentDTO(student.getNic(), student.getName(),student.getBirthDay(),student.getAddress(),student.getAge(),student.getGender(),student.getGender());
     }
+
+    @Override
+    public StudentDTO getStudent(String nic) throws Exception {
+        List<StudentDTO> all = findAll();
+        for (StudentDTO s:all) {
+            if (s.getNic().equals(nic)){
+                return new StudentDTO(
+                        s.getNic(),
+                        s.getName(),
+                        s.getBirthDay(),
+                        s.getAddress(),
+                        s.getAge(),
+                        s.getGender(),
+                        s.getMobileNumber(),
+                        s.getDate(),
+                        s.getTime()
+                );
+            }
+        }
+        return null;
+    }
 }
