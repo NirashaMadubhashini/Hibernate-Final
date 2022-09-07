@@ -10,21 +10,22 @@ Hibernate is used as ORM Tool in this project.
 
 
 <b>#Login<br></b>
-![login](src/assets/projects/login.png)<br>
-<b>#Customer DashBoard<br><b>
-![delivery](src/assets/projects/customerdash.png)<br>
-![delivery](src/assets/projects/addcustomer.png)<br>
-![delivery](src/assets/projects/managecustomer.png)<br>
-<b>#Item DashBoard<br><b>
-![park](src/assets/projects/admindash.png)<br>
-![park](src/assets/projects/add.png)<br>
-![park](src/assets/projects/manage.png)<br>
-<b>#PlaceOrder<br><b>
-![manage](src/assets/projects/placeorder.png)<br>
-<b>#Order Details<br></b>
-![order](src/assets/projects/orderDetails.png)
-<b>#Income<br><b>
-![add](src/assets/projects/income.png)<br>
+![login](src/lk/sipsewanainstitute/hibernate/assets/projects/login.png)<br>
+<b>#DashBoard<br><b>
+![delivery](src/lk/sipsewanainstitute/hibernate/assets/projects/dash.png)<br>
+<b>#StudentForm<br><b>
+![delivery](src/lk/sipsewanainstitute/hibernate/assets/projects/studentform.png)<br>
+<b>#StudentDeatils<br><b>
+![delivery](src/lk/sipsewanainstitute/hibernate/assets/projects/student%20details.png)<br>
+<b>#ProgramForm<br><b>
+![park](src/lk/sipsewanainstitute/hibernate/assets/projects/trainingform.png)<br>
+<b>#ProgramDetails<br><b>
+![park](src/lk/sipsewanainstitute/hibernate/assets/projects/tarinigdeatils.png)<br>
+<b>#RegisterForm<br><b>
+![manage](src/lk/sipsewanainstitute/hibernate/assets/projects/registerform.png)<br>
+<b>#RegisterDetails<br></b>
+![order](src/lk/sipsewanainstitute/hibernate/assets/projects/registerdetails.png)
+
 
 
 
