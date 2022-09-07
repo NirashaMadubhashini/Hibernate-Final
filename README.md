@@ -12,11 +12,11 @@ Hibernate is used as ORM Tool in this project.
 <b>#Login<br></b>
 ![login](src/lk/sipsewanainstitute/hibernate/assets/projects/login.png)<br>
 <b>#DashBoard<br><b>
-![delivery](src/lk/sipsewanainstitute/hibernate/assets/projects/dash.png)<br>
+![dashBoard](src/lk/sipsewanainstitute/hibernate/assets/projects/dash.png)<br>
 <b>#StudentForm<br><b>
-![delivery](src/lk/sipsewanainstitute/hibernate/assets/projects/studentform.png)<br>
+![studentForm](src/lk/sipsewanainstitute/hibernate/assets/projects/studentform.png)<br>
 <b>#StudentDeatils<br><b>
-![delivery](src/lk/sipsewanainstitute/hibernate/assets/projects/student%20details.png)<br>
+![StudentDeatils](src/lk/sipsewanainstitute/hibernate/assets/projects/student%20details.png)<br>
 <b>#ProgramForm<br><b>
 ![park](src/lk/sipsewanainstitute/hibernate/assets/projects/trainingform.png)<br>
 <b>#ProgramDetails<br><b>
